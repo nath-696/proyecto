@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dashboard Avanzado - Cáncer de Mama</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Dashboard IA & Proyecto Cáncer de Mama</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     :root {
@@ -11,207 +11,109 @@
       --light1: #EBCAED;
       --light2: #F5EFFF;
       --light3: #FADCF1;
-      --bg: #fff;
-      --text: #333;
+      --bg: #ffffff;
+      --text: #333333;
+      --font: 'Arial', sans-serif;
     }
-    body {
-      margin: 0;
-      font-family: 'Arial', sans-serif;
-      background: var(--light2);
-      color: var(--text);
-    }
-    header {
-      padding: 1rem;
-      background: var(--primary);
-      color: white;
-      text-align: center;
-    }
-    .filters {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      justify-content: center;
-      padding: 1rem;
-      background: var(--light3);
-    }
-    .filters select {
-      padding: 0.5rem;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      padding: 2rem;
-    }
-    .card {
-      background: var(--bg);
-      padding: 1rem;
-      border-radius: 8px;
-      box-shadow: 0 0 8px rgba(0,0,0,0.1);
-    }
-    canvas {
-      width: 100% !important;
-      height: 300px !important;
-    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family: var(--font); background: var(--light2); color: var(--text); line-height:1.5; }
+    header { background: var(--primary); color: white; padding: 1rem; text-align: center; }
+    .grid { display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit,minmax(250px,1fr)); padding:2rem; }
+    .card { background: var(--bg); padding:1rem; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1); position: relative; }
+    .card img { max-width:100%; border-radius:8px; margin-bottom:1rem; }
+    canvas { width:100% !important; height:200px !important; }
+    .info { max-width:800px; margin:2rem auto; background:var(--light3); padding:1.5rem; border-radius:8px; }
+    .info h2 { color:var(--primary); margin-bottom:1rem; }
+    .info p, .info ul { margin-bottom:1rem; }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>Dashboard Avanzado: Cáncer de Mama</h1>
-  </header>
+  <header><h1>Estadísticas de IA en Salud</h1></header>
 
-  <!-- Filtros simulados -->
-  <div class="filters">
-    <select><option>Región</option></select>
-    <select><option>Producto</option></select>
-    <select><option>Mes</option></select>
-    <select><option>Año</option></select>
+  <div class="grid">
+    <!-- Donut: IA como evolución social -->
+    <div class="card">
+      <h3>¿La IA es el siguiente paso social?</h3>
+      <canvas id="chartSocietyEvolution"></canvas>
+    </div>
+    <!-- Donut: IA puede resolver todos los problemas -->
+    <div class="card">
+      <h3>IA vs solución total</h3>
+      <canvas id="chartSolveAll"></canvas>
+    </div>
+    <!-- Donut: Reducir dependencia de robots -->
+    <div class="card">
+      <h3>Reducir dependencia de robots</h3>
+      <canvas id="chartReduceDependence"></canvas>
+    </div>
+    <!-- Bar: Inversión proyectada en IA -->
+    <div class="card">
+      <h3>Inversión en IA en salud (2025)</h3>
+      <canvas id="chartInvestment"></canvas>
+    </div>
   </div>
 
-  <!-- Graficas -->
+  <!-- Espacio para ilustraciones -->
   <div class="grid">
-    <!-- Profit Margin -->
-    <div class="card">
-      <h3>Profit Margin</h3>
-      <canvas id="profitMarginChart"></canvas>
-    </div>
+    <div class="card"><img src="https://via.placeholder.com/400x200?text=Mamografía+Detectada" alt="Mamografía"></div>
+    <div class="card"><img src="https://via.placeholder.com/400x200?text=Interfaz+IA+Explicable" alt="IA Explicable"></div>
+  </div>
 
-    <!-- Sales Target -->
-    <div class="card">
-      <h3>Sales Target Achievement</h3>
-      <canvas id="salesTargetChart"></canvas>
-    </div>
-
-    <!-- Bar por Región -->
-    <div class="card">
-      <h3>Target vs Actual Sales (por Región)</h3>
-      <canvas id="regionChart"></canvas>
-    </div>
-
-    <!-- Horizontal por Vendedores -->
-    <div class="card">
-      <h3>Target vs Actual Sales (por Persona)</h3>
-      <canvas id="salespersonChart"></canvas>
-    </div>
+  <div class="info">
+    <h2>Proyecto: Sistema Inteligente para la Detección Temprana de Cáncer de Mama</h2>
+    <p><strong>Descripción:</strong> Actualmente se está desarrollando un sistema innovador basado en Machine Learning para la detección temprana de cáncer de mama mediante el análisis de imágenes de mamografía. El sistema entrena modelos de IA con bases de datos médicas validadas, logrando identificar masas sospechosas con alta precisión.</p>
+    <ul>
+      <li>Aplicación web intuitiva para profesionales médicos.</li>
+      <li>Herramientas de IA explicable, visualizando zonas detectadas.</li>
+      <li>Chatbot con IA para resultados, consultas y explicaciones.</li>
+      <li>Sistema como apoyo médico eficiente y en tiempo real.</li>
+    </ul>
+    <p><strong>Objetivo General:</strong> Detectar masas sospechosas con alta precisión y sensibilidad, con resultados confiables y visualmente interpretables, mejorando diagnósticos médicos y apoyando intervenciones tempranas.</p>
+    <h3>Objetivos Específicos:</h3>
+    <ul>
+      <li>Modelos IA (Faster R‑CNN, YOLO, U‑Net) entrenados para precisión y sensibilidad.</li>
+      <li>Infraestructura tecnológica segura con bases de datos e interoperabilidad.</li>
+      <li>Interfaz web y chatbot facilitan interacción e interpretación.</li>
+      <li>IA explicable garantiza transparencia y confianza.</li>
+    </ul>
+    <h3>Objetivos Informáticos:</h3>
+    <ul>
+      <li>Optimización de modelos ML/DL para detección eficiente.</li>
+      <li>Infraestructura segura y en tiempo real para imágenes mamográficas.</li>
+    </ul>
   </div>
 
   <script>
-    // 🎯 Dataset editable (simulado) – modifícalo a tu gusto
-
-    // 1. Profit Margin (Donut)
-    const profitMarginChart = new Chart(
-      document.getElementById('profitMarginChart'),
-      {
+    // Función utilitaria para crear donuts
+    function createDonut(ctxId, label, percent) {
+      new Chart(document.getElementById(ctxId), {
         type: 'doughnut',
         data: {
-          labels: ['Margen', 'Restante'],
-          datasets: [{
-            data: [15.34, 100 - 15.34],
-            backgroundColor: ['#AA4465', '#f0f0f0']
-          }]
+          labels: [label, 'Resto'],
+          datasets: [{ data: [percent, 100 - percent], backgroundColor: ['#AA4465','#f0f0f0'] }]
         },
-        options: {
-          cutout: '70%',
-          plugins: { legend: { display: false } }
-        }
-      }
-    );
+        options: { cutout:'70%', plugins:{ legend:{ display:false } } }
+      });
+    }
 
-    // 2. Sales Target Achievement
-    const salesTargetChart = new Chart(
-      document.getElementById('salesTargetChart'),
-      {
-        type: 'doughnut',
-        data: {
-          labels: ['Logrado', 'Pendiente'],
-          datasets: [{
-            data: [52.21, 100 - 52.21],
-            backgroundColor: ['#AA4465', '#f0f0f0']
-          }]
-        },
-        options: {
-          cutout: '70%',
-          plugins: { legend: { display: false } }
-        }
-      }
-    );
+    createDonut('chartSocietyEvolution', 'África Latina — IA evolución', 56.4);
+    createDonut('chartSolveAll', 'Consumidores',  (38.9+40.9)/2);
+    createDonut('chartReduceDependence', 'Reducir robots', (59.9+63.3)/2);
 
-    // 3. Target vs Actual by Region
-    const regionLabels = ['West', 'Central', 'East', 'South', 'North'];
-    const actualRegion = [0.3, 0.3, 0.3, 0.3, 0.3];
-    const targetRegion = [0.5, 0.45, 0.45, 0.6, 0.5];
-
-    const regionChart = new Chart(
-      document.getElementById('regionChart'),
-      {
-        type: 'bar',
-        data: {
-          labels: regionLabels,
-          datasets: [
-            {
-              label: 'Total Sales',
-              backgroundColor: '#EBCAED',
-              data: actualRegion
-            },
-            {
-              label: 'Sales Target',
-              backgroundColor: '#AA4465',
-              data: targetRegion
-            }
-          ]
-        },
-        options: {
-          responsive: true,
-          scales: {
-            y: {
-              beginAtZero: true,
-              max: 0.7
-            }
-          }
-        }
-      }
-    );
-
-    // 4. Horizontal Bar por Persona
-    const salesLabels = ['John Doe', 'Emily Davis', 'Jane Smith', 'Michael Brown', 'Robert Johnson'];
-    const actualSales = [0.35, 0.27, 0.27, 0.27, 0.19];
-    const targetSales = [0.6, 0.63, 0.38, 0.59, 0.39];
-
-    const salespersonChart = new Chart(
-      document.getElementById('salespersonChart'),
-      {
-        type: 'bar',
-        data: {
-          labels: salesLabels,
-          datasets: [
-            {
-              label: 'Total Sales',
-              backgroundColor: '#FADCF1',
-              data: actualSales
-            },
-            {
-              label: 'Sales Target',
-              backgroundColor: '#AA4465',
-              data: targetSales
-            }
-          ]
-        },
-        options: {
-          indexAxis: 'y',
-          responsive: true,
-          scales: {
-            x: {
-              beginAtZero: true,
-              max: 0.7
-            }
-          }
-        }
-      }
-    );
+    // Gráfico de barras para inversión en IA
+    new Chart(document.getElementById('chartInvestment'), {
+      type: 'bar',
+      data: {
+        labels: ['2018', '2025'],
+        datasets: [{
+          label: 'Inversión (millones USD)',
+          data: [24000, 36000], // 50% más
+          backgroundColor: ['#FADCF1', '#AA4465']
+        }]
+      },
+      options: { scales:{ y:{ beginAtZero:true } } }
+    });
   </script>
-
 </body>
 </html>
