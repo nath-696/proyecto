@@ -1,0 +1,178 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: rgb(245, 239, 255);
+  color: #333;
+}
+
+.hero {
+  background-color: rgb(250, 220, 241);
+  text-align: center;
+  padding: 60px 20px;
+  color: rgb(170, 68, 101);
+}
+
+.hero h1 {
+  font-size: 2em;
+}
+
+.hero p {
+  font-size: 1.1em;
+  margin-bottom: 20px;
+}
+.grid-dashboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+
+.btn {
+  background-color: rgb(170, 68, 101);
+  color: white;
+  padding: 12px 24px;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.dashboard {
+  padding: 50px 20px;
+  background-color: rgb(235, 202, 237);
+}
+
+.dashboard h2 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+canvas {
+  display: block;
+  margin: 20px auto;
+  max-width: 90%;
+}
+
+.proyecto {
+  background-color: white;
+  padding: 50px 20px;
+}
+
+.proyecto h2 {
+  color: rgb(170, 68, 101);
+  text-align: center;
+}
+
+.proyecto ul {
+  list-style: none;
+  padding-left: 0;
+  max-width: 700px;
+  margin: auto;
+}
+
+.proyecto li {
+  margin: 10px 0;
+  background-color: rgb(245, 239, 255);
+  padding: 12px;
+  border-radius: 6px;
+}
+.dashboard {
+  background-color: rgb(235, 202, 237);
+  padding: 50px 20px;
+}
+
+.dashboard h2 {
+  text-align: center;
+  color: #aa4465;
+  margin-bottom: 40px;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.card {
+  background-color: white;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.card h3 {
+  text-align: center;
+  color: #aa4465;
+  margin-bottom: 15px;
+}
+
+.card.wide {
+  grid-column: span 2;
+}
+.dashboard-description {
+  max-width: 800px;
+  margin: 0 auto 40px auto;
+  text-align: center;
+  font-size: 1rem;
+  color: #444;
+  background: #f5efff;
+  padding: 15px 25px;
+  border-radius: 10px;
+}
+.pipeline-section {
+  background: white;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.pipeline-section h2 {
+  color: #aa4465;
+  margin-bottom: 50px;
+}
+
+.pipeline-timeline {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  padding-left: 30px;
+  border-left: 4px solid #ebcaed;
+}
+
+.pipeline-step {
+  position: relative;
+  margin-bottom: 50px;
+  padding-left: 20px;
+  text-align: left;
+}
+
+.pipeline-step h3 {
+  margin: 0;
+  color: #aa4465;
+  font-size: 1.2em;
+}
+
+.pipeline-step p {
+  margin: 10px 0 0;
+  font-size: 1rem;
+  color: #555;
+}
+
+.pipeline-step .circle {
+  position: absolute;
+  left: -42px;
+  top: 0;
+  width: 32px;
+  height: 32px;
+  background-color: #fadcf1;
+  border: 2px solid #aa4465;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 30px;
+  font-weight: bold;
+  color: #aa4465;
+  font-size: 16px;
+}
+
