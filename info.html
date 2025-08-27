@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Info about Heart Disease - DeepHeart</title>
+  <title>DeepHeart</title>
   <link rel="stylesheet" href="styles.css" />
   <script defer src="script.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
@@ -18,7 +18,7 @@
     </div>
     <nav>
       <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
+        <li><a href="#">Home</a></li>
         <li class="dropdown">
           <a href="#">Tests ▾</a>
           <ul class="dropdown-menu">
@@ -27,33 +27,42 @@
             <li><a href="#">Heart Attack</a></li>
           </ul>
         </li>
-        <li><a href="info.html">Info about heart disease</a></li>
+        <li><a href="#">Info about heart disease</a></li>
       </ul>
     </nav>
     <button class="signup-btn">Sign up</button>
   </header>
 
-  <!-- BREADCRUMB -->
-  <section class="breadcrumb">
-    <span>Home</span> &nbsp; › &nbsp; <strong>Info about heart disease</strong>
-  </section>
+  <!-- HERO SECTION -->
+  <main>
+    <section class="hero">
+      <h1>May your heart<br>stay healthy & happy with<br><strong>DeepHeart</strong></h1>
+    </section>
 
-  <!-- CONTENT -->
-  <main class="info-page">
-    <img src="https://img.icons8.com/color/480/heart-health.png" alt="Heart Info" />
-    <p>Here will be information<br>about heart disease</p>
+    <!-- CARDS -->
+    <section class="cards">
+      <div class="card pink">
+        <img src="https://img.icons8.com/ios-filled/100/heart-with-pulse.png" alt="Heart Failure" />
+        <h3>Heart Failure</h3>
+        <p>Check the probability of your heart failure</p>
+        <button onclick="alert('Heart Failure Test')">Test</button>
+      </div>
+
+      <div class="card blue">
+        <img src="https://img.icons8.com/ios-filled/100/heart-health.png" alt="Cardiovascular Disease" />
+        <h3>Cardiovascular disease</h3>
+        <p>Test the probability of your cardiovascular diseases</p>
+        <button onclick="alert('Cardiovascular Disease Test')">Test</button>
+      </div>
+
+      <div class="card orange">
+        <img src="https://img.icons8.com/ios-filled/100/heart-with-electrocardiogram.png" alt="Heart Attack" />
+        <h3>Heart Attack</h3>
+        <p>Look at the probability of your heart attack</p>
+        <button onclick="alert('Heart Attack Test')">Test</button>
+      </div>
+    </section>
   </main>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="footer-contact">
-      <span>📧 missmaya2404@gmail.com</span>
-      <span>📞 +993(65)147707</span>
-    </div>
-    <div class="footer-right">
-      Made by Theta team
-    </div>
-  </footer>
 
 </body>
 </html>
