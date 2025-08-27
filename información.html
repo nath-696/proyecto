@@ -3,198 +3,269 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Servicios — Detección de Cáncer de Mama</title>
+<title>Landing Salud — Diseño (solo UI)</title>
 <style>
-  /* ====== Tokens de color (tu paleta) ====== */
   :root{
-    --rose-600:#E67882; /* acento principal */
-    --rose-300:#E7ABAF; /* botón / acentos suaves */
-    --rose-100:#F8C6CC; /* fondos pálidos */
-    --gray-500:#A4A4A4; /* texto secundario */
-    --paper:#F0F0F0;    /* blanco cálido */
-    --ink:#1F2937;      /* texto principal */
-    --radius:22px;
-    --shadow:0 10px 30px rgba(230,120,130,.25);
+    --rose-600:#E67882;
+    --rose-300:#E7ABAF;
+    --rose-100:#F8C6CC;
+    --paper:#F0F0F0;
+    --ink:#0F172A;
+    --radius:16px;
+    --shadow-sm:0 2px 6px rgba(0,0,0,.03);
+    --shadow-md:0 4px 12px rgba(230,120,130,.12);
   }
 
-  /* ====== Reset mínimo ====== */
   *{box-sizing:border-box}
   html,body{margin:0}
   body{
-    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Inter, "Helvetica Neue", Arial;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
     color:var(--ink);
-    background:
-      radial-gradient(1200px 600px at 80% -10%, rgba(231,171,175,.55), transparent 60%),
-      radial-gradient(900px 500px at -10% 20%, rgba(248,198,204,.55), transparent 60%),
-      linear-gradient(180deg, #fff, #fff);
+    background: linear-gradient(180deg,#ffffff, #faf7f8 60%, #ffffff);
   }
+  .container{ width:min(1200px, 92%); margin-inline:auto; }
+  .section{ padding: clamp(36px, 6vw, 72px) 0; }
 
-  /* ====== Sección ====== */
-  .section{
-    padding: clamp(48px, 6vw, 96px) clamp(16px, 5vw, 64px);
-    position:relative;
+  /* ===== Hero ===== */
+  .hero{ display:grid; grid-template-columns: 1.15fr .85fr; align-items:center; gap:32px; }
+  @media (max-width: 900px){ .hero{ grid-template-columns:1fr; } }
+  .hero-card{ background:#fff; border:1px solid #eee; border-radius:32px; padding: clamp(22px,3.6vw,36px); box-shadow:none; position:relative; overflow:hidden; }
+  .hero h1{ font-size: clamp(28px,4.6vw,48px); line-height:1.1; margin:0 0 10px; }
+  .hero p{ color:#516072; margin:0 0 18px; max-width:60ch; }
+  .hero-actions{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+  .btn-primary{ background: var(--rose-600); color:#fff; padding:12px 18px; border-radius:12px; font-weight:800; box-shadow: var(--shadow-md); border:none; }
+  .btn-ghost{ border:1px solid var(--rose-300); color:#7a3340; padding:12px 16px; border-radius:12px; background:#fff; font-weight:700; }
+
+  .hero-visual{ position:relative; min-height: 360px; }
+  .blob{ position:absolute; inset: auto 0 0 auto; width: 82%; aspect-ratio:1/1; background: radial-gradient(closest-side, rgba(231,171,175,.6), rgba(231,171,175,.15)); border-radius: 36% 64% 52% 48% / 40% 44% 56% 60%; filter: blur(2px); }
+  .doctor{ position:absolute; right:6%; bottom:0; width:min(420px, 86%); height:auto; border-radius:24px; object-fit:cover; }
+  .doctor.placeholder{ background: #f3e6e9; border:1px dashed var(--rose-300); height: 92%; }
+
+  /* ===== Stats strip ===== */
+  .stats{ display:grid; grid-template-columns: repeat(4,1fr); gap:14px; margin-top:18px; }
+  @media (max-width: 900px){ .stats{ grid-template-columns: repeat(2,1fr);} }
+  .stat{ background:#fff; border:1px solid #eee; border-radius:16px; padding:14px 16px; text-align:center; box-shadow: var(--shadow-sm); }
+  .stat .num{ font-weight:900; font-size: clamp(18px, 2.8vw, 24px); color:#0b1220 }
+  .stat .label{ color:#6b7280; font-weight:600; font-size:.95rem }
+
+  /* ===== Info Section ===== */
+  .info{ background: var(--rose-100); border-top:1px solid #eee; }
+  .info .content{ max-width:900px; margin-inline:auto; text-align:center; }
+  .info h2{ font-size: clamp(24px,3vw,36px); margin:0 0 20px; color:#7a3340; }
+  .info-box{ background:#fff; border:1px solid #e4e4e7; border-radius:20px; padding:24px; }
+  .info-box p{ color:#444; line-height:1.6; margin:0; }
+
+  /* ===== Sección de servicios (tarjetas) ===== */
+  .services{ background:#fff0f2; border-top:1px solid #f3d6da; border-bottom:1px solid #f3d6da; }
+  .services h2{ text-align:center; color:#0f172a; font-size: clamp(24px,3.2vw,36px); margin:0 0 8px; }
+  .services .lead{ text-align:center; margin:0 auto 24px; max-width: 62ch; color:#556070; }
+
+  .grid-services{ display:grid; grid-template-columns: repeat(4,1fr); gap:20px; margin-top:22px; align-items:start; }
+  @media(max-width:1000px){ .grid-services{ grid-template-columns:repeat(2,1fr);} }
+  @media(max-width:600px){ .grid-services{ grid-template-columns:1fr;} }
+
+  .service-card{
+    background:#fff; border:1px solid #f0dfe2; border-radius:20px; padding:24px 20px;
+    text-align:left; box-shadow:0 4px 16px rgba(230,120,130,.12);
+    transition:.25s ease; position:relative; overflow:hidden;
+  }
+  .service-card:hover{ transform:translateY(-3px); box-shadow:0 8px 22px rgba(230,120,130,.18); }
+
+  .service-icon{ width:46px; height:46px; display:grid; place-items:center; background:#F8C6CC; border-radius:12px; color:#7a3340; font-size:20px; margin-bottom:14px; }
+  .service-card h3{ margin:0 0 8px; font-weight:800; font-size:1.1rem; color:#0b1220; }
+  .service-card p{ margin:0 0 14px; font-size:.95rem; color:#556070; }
+
+  .btn{ display:inline-block; padding:9px 16px; background:#E7ABAF; border-radius:10px; font-weight:700; font-size:.92rem; color:#7a3340; border:none; cursor:pointer; }
+  .btn:focus-visible{ outline:2px solid #E67882; outline-offset:2px; }
+
+  /* Panel “Saber más” dentro del flujo */
+  .more{
+    position:static;
+    margin-top:12px;
+    background:#fff;
+    border:1px solid #e4e4e7;
+    border-radius:12px;
+    padding:0 14px;
+    border-width:0;
+    max-height:0;
     overflow:hidden;
+    transition:max-height .3s ease, padding .3s ease, border-width .3s ease;
+    word-break:break-word;
+  }
+  .service-card.open .more{
+    max-height:1000px; /* valor alto para textos extensos */
+    padding:14px;
+    border-width:1px;
   }
 
-  /* blob decorativo */
-  .blob{
-    position:absolute; inset:auto -120px -120px auto;
-    width:420px; height:420px; border-radius:50%;
-    background: radial-gradient(closest-side, rgba(248,198,204,.8), rgba(231,171,175,.2));
-    filter: blur(16px); opacity:.55; pointer-events:none;
-    transform: rotate(8deg);
-  }
-
-  .eyebrow{
-    display:inline-flex; align-items:center; gap:10px;
-    padding:6px 12px;
-    border-radius:999px;
-    background: rgba(231,171,175,.25);
-    color:#7a3340;
-    font-weight:600; letter-spacing:.02em; font-size:.9rem;
-    backdrop-filter: blur(6px);
-  }
-  .eyebrow::before{
-    content:"";
-    width:10px;height:10px;border-radius:50%;
-    background: var(--rose-600);
-    box-shadow: 0 0 0 5px rgba(230,120,130,.25);
-  }
-
-  h2{
-    margin:14px 0 10px; font-size: clamp(28px,4vw,40px);
-    line-height:1.1; color:#0f172a;
-  }
-  .lead{
-    max-width: 62ch;
-    color:#475569; font-size: clamp(14px,2.2vw,17px);
-    margin: 0 0 28px;
-  }
-
-  /* ====== Grid de tarjetas ====== */
-  .grid{
-    display:grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: clamp(14px, 2.5vw, 22px);
-  }
-  @media (max-width: 1100px){ .grid{ grid-template-columns: repeat(2, 1fr);} }
-  @media (max-width: 640px){ .grid{ grid-template-columns: 1fr;} }
-
-  .card{
-    position:relative;
-    border-radius: var(--radius);
-    background: rgba(255,255,255,.65);
-    backdrop-filter: blur(8px);
-    border:1px solid rgba(231,171,175,.35);
-    box-shadow: var(--shadow);
-    padding: 22px 20px 18px;
-    min-height: 210px;
-    transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
-    overflow:hidden;
-  }
-  .card:hover{
-    transform: translateY(-6px);
-    box-shadow: 0 14px 40px rgba(230,120,130,.32);
-    background: rgba(255,255,255,.82);
-  }
-
-  /* corners decorativos */
-  .corner{
-    position:absolute; width:18px; height:18px; border-radius:6px;
-    background: var(--rose-100); opacity:.8;
-  }
-  .corner.tl{top:10px; left:12px}
-  .corner.tr{top:10px; right:12px}
-  .corner.bl{bottom:12px; left:12px}
-  .corner.br{bottom:12px; right:12px}
-
-  /* icono */
-  .icon{
-    width:54px;height:54px;border-radius:16px;
-    display:grid;place-items:center;
-    background: linear-gradient(145deg, var(--rose-100), var(--paper));
-    border:1px solid rgba(231,171,175,.5);
-    margin-bottom:14px;
-  }
-  .icon svg{width:28px;height:28px; stroke:#b94f5c}
-
-  .title{
-    font-weight:800; letter-spacing:.02em;
-    color:#0b1220; margin:0 0 6px; font-size:1.05rem;
-  }
-  .desc{
-    margin:0; color:#556070; font-size:.95rem; line-height:1.5;
-  }
-
-  .cta{
-    margin-top:14px; display:inline-flex; align-items:center; gap:8px;
-    padding:10px 14px; border-radius:12px;
-    background: linear-gradient(180deg, var(--rose-300), #f3d6da);
-    color:#7a3340; text-decoration:none; font-weight:700; font-size:.92rem;
-    box-shadow: 0 6px 14px rgba(231,171,175,.35);
-    transition: transform .18s ease, box-shadow .18s ease;
-  }
-  .cta:hover{ transform: translateY(-2px); box-shadow: 0 10px 18px rgba(231,171,175,.45); }
-  .cta svg{ width:16px;height:16px; stroke:#7a3340 }
-
-  /* línea guía superior (detalle visual) */
-  .guide{
-    height:3px; width:100%;
-    background: linear-gradient(90deg, transparent, var(--rose-100), transparent);
-    border-radius:999px; margin: 18px 0 28px;
-    position:relative;
-  }
-  .guide::after{
-    content:""; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
-    width:10px;height:10px; border-radius:50%; background: var(--rose-600);
-    box-shadow:0 0 0 6px rgba(230,120,130,.25);
-  }
+  /* ===== Galería de fotos ===== */
+  .gallery{ background:#fff; }
+  .gallery h2{ text-align:center; margin:0 0 20px; color:#0f172a; font-size: clamp(24px,3.2vw,36px); }
+  .gallery .sub{ text-align:center; color:#556070; max-width:62ch; margin:0 auto 24px; }
+  .gallery-grid{ display:grid; grid-template-columns: repeat(4, 1fr); gap:12px; }
+  @media (max-width: 1100px){ .gallery-grid{ grid-template-columns: repeat(3, 1fr);} }
+  @media (max-width: 780px){ .gallery-grid{ grid-template-columns: repeat(2, 1fr);} }
+  @media (max-width: 520px){ .gallery-grid{ grid-template-columns: 1fr; } }
+  .photo{ position:relative; border-radius:16px; overflow:hidden; border:1px solid #e8e8ee; box-shadow: var(--shadow-sm); background:#f6f6f6; }
+  .photo img{ width:100%; height:100%; display:block; object-fit:cover; aspect-ratio: 4 / 3; }
+  .photo .caption{ position:absolute; left:0; right:0; bottom:0; padding:10px 12px; background:linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.35)); color:#fff; font-weight:600; font-size:.92rem; }
 </style>
 </head>
 <body>
+  <!-- ===== Hero ===== -->
+  <section class="section">
+    <div class="container hero">
+      <div class="hero-card">
+        <h1><!-- Título principal --></h1>
+        <p><!-- Texto breve --></p>
+        <div class="hero-actions">
+          <button type="button" class="btn-primary">Botón</button>
+          <button type="button" class="btn-ghost">Secundario</button>
+        </div>
 
-<section class="section" aria-labelledby="services-title">
-  <span class="eyebrow">Nuestros servicios</span>
-  <h2 id="services-title">Cuidamos tu sonrisa con tecnología y calidez</h2>
-  <p class="lead">
-    Ofrecemos únicamente áreas en las que contamos con experiencia real. Todos los procedimientos se realizan en clínica,
-    sin transferencias a terceros. Integrado a nuestro proyecto de <strong>detección temprana de cáncer de mama</strong>, priorizamos
-    precisión, seguridad y acompañamiento humano.
-  </p>
-
-  <div class="guide" aria-hidden="true"></div>
-
-  <div class="grid">
-    <!-- IMPLANTACIÓN -->
-    <article class="card">
-      <span class="corner tl"></span><span class="corner tr"></span>
-      <span class="corner bl"></span><span class="corner br"></span>
-
-      <div class="icon" aria-hidden="true">
-        <!-- diente/implante -->
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">
-          <path d="M7 6c0-2 2-3 5-3s5 1 5 3c0 5-2 6-2 9 0 3-2 5-3 5s-3-2-3-5c0-3-2-4-2-9Z"/>
-          <path d="M10 13.5c1 .6 3 .6 4 0"/>
-        </svg>
+        <div class="stats">
+          <div class="stat"><div class="num">—</div><div class="label">Indicador</div></div>
+          <div class="stat"><div class="num">—</div><div class="label">Indicador</div></div>
+          <div class="stat"><div class="num">—</div><div class="label">Indicador</div></div>
+          <div class="stat"><div class="num">—</div><div class="label">Indicador</div></div>
+        </div>
       </div>
-      <h3 class="title">Implantación</h3>
-      <p class="desc">Colocación de implantes confiables para restaurar piezas ausentes, con planificación guiada por imagen.</p>
-      <a class="cta" href="#">
-        Saber más
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-      </a>
-    </article>
 
-    <!-- PRÓTESIS -->
-    <article class="card">
-      <span class="corner tl"></span><span class="corner tr"></span>
-      <span class="corner bl"></span><span class="corner br"></span>
-
-      <div class="icon" aria-hidden="true">
-        <!-- prótesis/corona -->
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">
-          <path d="M4 10c3-3 13-3 16 0l-2 6H6L4 10Z"/>
-          <path d="M8 16v2a4 4 0 0 0 8 0v-2"/>
-        </svg>
+      <div class="hero-visual">
+        <div class="blob" aria-hidden="true"></div>
+        <img class="doctor placeholder" alt="" />
       </div>
-      <h3 class="title">Prótesis</h3>
+    </div>
+  </section>
+
+  <!-- ===== Info Section ===== -->
+  <section class="section info">
+    <div class="container content">
+      <h2>Evaluación mamaria: resultados y próximos pasos</h2>
+      <div class="info-box">
+        <p><!-- Texto informativo --></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECCIÓN DE SERVICIOS ===== -->
+  <section class="section services">
+    <div class="container">
+      <h2><!-- Título sección --></h2>
+      <p class="lead"><!-- Texto breve --></p>
+
+      <div class="grid-services">
+        <!-- CARD 1 -->
+        <div class="service-card">
+          <div class="service-icon">✅</div>
+          <h3>Hallazgo benigno</h3>
+          <p>Alteración no cancerosa con rasgos tranquilos en imagen (redondeada, márgenes definidos). Ejemplos:
+             quiste simple, fibroadenoma. Suele requerir seguimiento periódico y comparación con estudios previos, sin tratamientos invasivos salvo cambios.</p>
+          <button type="button" class="btn more-toggle" aria-expanded="false">Saber más</button>
+          <div class="more">
+           Un hallazgo benigno en mama es una alteración no cancerosa que, por su apariencia en imagen y el contexto 
+           clínico, tiene probabilidad muy baja de malignidad. Suele ser redondeado, con márgenes definidos y evolución estable,
+            como quistes simples, fibroadenomas o calcificaciones típicamente inocuas. Ante estos hallazgos, la conducta habitual es control periódico y comparación con estudios previos para 
+           confirmar estabilidad, evitando procedimientos innecesarios, pero consultando si aparecen cambios notorios, 
+           crecimiento rápido, dolor persistente, secreción sanguinolenta u otros síntomas.
+          </div>
+        </div>
+
+        <!-- CARD 2 -->
+        <div class="service-card">
+          <div class="service-icon">⚠️</div>
+          <h3>Hallazgo sospechoso / probable maligno</h3>
+          <p>Lesión con signos de alarma: masa irregular o espiculada, distorsión arquitectural, microcalcificaciones
+             pleomórficas. Requiere evaluación dirigida y,
+             con frecuencia, biopsia guiada por imagen para confirmar y definir el tratamiento oportuno.</p>
+          <button type="button" class="btn more-toggle" aria-expanded="false">Saber más</button>
+          <div class="more">
+            Un hallazgo sospechoso o maligno es una lesión cuyo patrón de imagen y características clínicas elevan 
+            la probabilidad de cáncer. Puede presentarse como masa irregular o espiculada, distorsión arquitectural o 
+            microcalcificaciones pleomórficas agrupadas, a veces con cambios cutáneos o ganglios axilares anómalos. 
+            Requiere evaluación diagnóstica dirigida y, con frecuencia, biopsia guiada por imagen para confirmar.
+             Un diagnóstico temprano permite terapias más efectivas y personalizadas, reduce complicaciones y mejora 
+             el pronóstico, por lo que la derivación oportuna es esencial.
+          </div>
+        </div>
+
+        <!-- CARD 3 -->
+        <div class="service-card">
+          <div class="service-icon">📊</div>
+          <h3>Factores de riesgo</h3>
+          <p>Incluyen no modificables (edad, antecedentes familiares, mutaciones BRCA1/2, densidad mamaria alta, 
+            historia personal de lesiones de alto riesgo) y modificables (alcohol, obesidad posmenopáusica, sedentarismo,
+             tabaco, terapia hormonal combinada prolongada).   </p>
+          <button type="button" class="btn more-toggle" aria-expanded="false">Saber más</button>
+          <div class="more">
+            Los factores de riesgo orientan un tamizaje personalizado. Entre los no modificables destacan la edad,
+             antecedentes familiares de primer grado, mutaciones como BRCA1/2, densidad mamaria elevada y antecedentes 
+             personales de lesiones de alto riesgo. Entre los modificables figuran alcohol, obesidad posmenopáusica, 
+             sedentarismo, tabaco y terapia hormonal combinada prolongada. Modelos como Tyrer–Cuzick o Gail, sumados 
+             a la densidad, estiman el riesgo a lo largo de la vida y también ayudan a decidir cuándo añadir resonancia o 
+             controles más frecuentes.
+          </div>
+        </div>
+
+        <!-- CARD 4 -->
+        <div class="service-card">
+          <div class="service-icon">🔎</div>
+          <h3>Atención temprana</h3>
+          <p>Mantén tamizaje según edad y riesgo, guarda estudios y consulta ante cambios: bulto nuevo, piel de naranja, 
+            retracción del pezón, secreción. Detectar temprano permite tratamientos menos agresivos y obtener mejores resultados.</p>
+          <button type="button" class="btn more-toggle" aria-expanded="false">Saber más</button>
+          <div class="more">
+           Para una detección temprana efectiva, combina tamizaje según edad y riesgo con conciencia mamaria: conoce 
+           el aspecto habitual de tus mamas y consulta ante bulto nuevo, retracción del pezón, piel de naranja, 
+           secreción espontánea o ganglio axilar duro. Conserva estudios previos para comparación, agenda recordatorios y
+            sigue las indicaciones clínicas. La actividad física regular, limitar el alcohol y mantener peso saludable 
+            reducen el riesgo. Actuar pronto ante síntomas o cambios claros acorta tiempos diagnósticos y facilita 
+            tratamientos eficaces.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== GALERÍA (sin botones, solo scroll) ===== -->
+  <section class="section gallery">
+    <h2>Galería</h2>
+    <p class="sub"><!-- Texto opcional --></p>
+    <div class="gallery-grid">
+      <figure class="photo"><img src="imagenes/detection1.png" alt="" loading="lazy"><figcaption class="caption">detection1</figcaption></figure>
+      <figure class="photo"><img src="imagenes/" alt="" loading="lazy"><figcaption class="caption"></figcaption></figure>
+      <figure class="photo"><img src="" alt="" loading="lazy"><figcaption class="caption"></figcaption></figure>
+      <figure class="photo"><img src="" alt="" loading="lazy"><figcaption class="caption"></figcaption></figure>
+      <figure class="photo"><img src="" alt="" loading="lazy"><figcaption class="caption"></figcaption></figure>
+      <figure class="photo"><img src="" alt="" loading="lazy"><figcaption class="caption"></figcaption></figure>
+      <figure class="photo"><img src="" alt="" loading="lazy"><figcaption class="caption"></figcaption></figure>
+      <figure class="photo"><img src="" alt="" loading="lazy"><figcaption class="caption"></figcaption></figure>
+    </div>
+  </section>
+
+<script>
+/* Expansión/colapso de tarjetas (en flujo) */
+(function(){
+  document.addEventListener('click', function(ev){
+    const btn = ev.target.closest('.more-toggle');
+    if(!btn) return;
+    const card = btn.closest('.service-card');
+    const opening = !card.classList.contains('open');
+
+    // Cerrar otras para evitar demasiada altura a la vez
+    document.querySelectorAll('.service-card.open').forEach(c=>{
+      if(c !== card){
+        c.classList.remove('open');
+        const b = c.querySelector('.more-toggle');
+        if(b){ b.textContent = 'Saber más'; b.setAttribute('aria-expanded','false'); }
+      }
+    });
+
+    card.classList.toggle('open');
+    btn.textContent = opening ? 'Ver menos' : 'Saber más';
+    btn.setAttribute('aria-expanded', String(opening));
+  });
+})();
+</script>
+</body>
+</html>
