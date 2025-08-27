@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="encd">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services Section</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #F0F0F0;
+      color: #333;
+    }
+
+    .services-section {
+      background-color: #E67882;
+      padding: 50px 20px;
+      text-align: center;
+      color: #fff;
+    }
+
+    .services-section h2 {
+      font-size: 28px;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .services-section p {
+      max-width: 700px;
+      margin: 0 auto 40px;
+      font-size: 16px;
+      color: #F8C6CC;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .service-card {
+      background-color: #fff;
+      border-radius: 12px;
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 18px rgba(0,0,0,0.15);
+    }
+
+    .service-card img {
+      width: 60px;
+      margin-bottom: 15px;
+    }
+
+    .service-card h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+      color: #E67882;
+    }
+
+    .service-card p {
+      font-size: 14px;
+      color: #555;
+    }
+
+    .service-link {
+      display: inline-block;
+      margin-top: 15px;
+      text-decoration: none;
+      color: #fff;
+      background-color: #E7ABAF;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: background 0.3s;
+    }
+
+    .service-link:hover {
+      background-color: #F8C6CC;
+    }
+  </style>
+</head>
+<body>
+  <section class="services-section">
+    <h2>SERVICES</h2>
+    <p>We offer only those areas that we can provide at an expert level. <br>
+       All procedures are carried out in the clinic, without transferring patients to third-party specialists.</p>
+
+    <div class="services-grid">
+      <div class="service-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/2927/2927347.png" alt="Implantation">
+        <h3>IMPLANTATION</h3>
+        <p>Placement of reliable implants to restore missing teeth.</p>
+        <a href="#" class="service-link">Learn More →</a>
+      </div>
+
+      <div class="service-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/3050/3050525.png" alt="Prosthetics">
+        <h3>PROSTHETICS</h3>
+        <p>Creation of comfortable and aesthetic crowns, bridges, and dentures.</p>
+        <a href="#" class="service-link">Learn More →</a>
+      </div>
+
+      <div class="service-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/183/183323.png" alt="Orthodontics">
+        <h3>ORTHODONTICS</h3>
+        <p>Correction of bite and teeth alignment using braces or aligners.</p>
+        <a href="#" class="service-link">Learn More →</a>
+      </div>
+
+      <div class="service-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/2927/2927340.png" alt="Therapy">
+        <h3>THERAPY</h3>
+        <p>Treatment of cavities and inflammation, restoring teeth while preserving.</p>
+        <a href="#" class="service-link">Learn More →</a>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
