@@ -2,7 +2,7 @@
 new Chart(document.getElementById('chart1'), {
   type: 'doughnut',
   data: {
-    labels: ['LatAm (56.4%)', 'Saludables (38.9%)', 'No Saludables (40.9%)'],
+    labels: ['LatAm (56.4%)', 'Consumidores Saludables (38.9%)', 'Consumidores No Saludables (40.9%)'],
     datasets: [{
       label: 'IA percepción social',
       data: [56.4, 38.9, 40.9],
@@ -78,11 +78,11 @@ new Chart(document.getElementById('chart5'), {
   type: 'bar',
   data: {
     labels: [
-      'South America',
-      'Asia Pacific',
-      'Middle East & Africa',
-      'North America',
-      'Europe'
+      'Sur America',
+      'Asia y El Pacifico',
+      'Medio Oriente & Africa',
+      'Norte America',
+      'Europa'
     ],
     datasets: [{
       label: 'Porcentaje (%)',
