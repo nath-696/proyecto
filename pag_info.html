@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dashboard Avanzado - Cáncer de Mama</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --primary: #AA4465;
+      --light1: #EBCAED;
+      --light2: #F5EFFF;
+      --light3: #FADCF1;
+      --bg: #fff;
+      --text: #333;
+    }
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: var(--light2);
+      color: var(--text);
+    }
+    header {
+      padding: 1rem;
+      background: var(--primary);
+      color: white;
+      text-align: center;
+    }
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      padding: 1rem;
+      background: var(--light3);
+    }
+    .filters select {
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      padding: 2rem;
+    }
+    .card {
+      background: var(--bg);
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    }
+    canvas {
+      width: 100% !important;
+      height: 300px !important;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Dashboard Avanzado: Cáncer de Mama</h1>
+  </header>
+
+  <!-- Filtros simulados -->
+  <div class="filters">
+    <select><option>Región</option></select>
+    <select><option>Producto</option></select>
+    <select><option>Mes</option></select>
+    <select><option>Año</option></select>
+  </div>
+
+  <!-- Graficas -->
+  <div class="grid">
+    <!-- Profit Margin -->
+    <div class="card">
+      <h3>Profit Margin</h3>
+      <canvas id="profitMarginChart"></canvas>
+    </div>
+
+    <!-- Sales Target -->
+    <div class="card">
+      <h3>Sales Target Achievement</h3>
+      <canvas id="salesTargetChart"></canvas>
+    </div>
+
+    <!-- Bar por Región -->
+    <div class="card">
+      <h3>Target vs Actual Sales (por Región)</h3>
+      <canvas id="regionChart"></canvas>
+    </div>
+
+    <!-- Horizontal por Vendedores -->
+    <div class="card">
+      <h3>Target vs Actual Sales (por Persona)</h3>
+      <canvas id="salespersonChart"></canvas>
+    </div>
+  </div>
+
+  <script>
+    // 🎯 Dataset editable (simulado) – modifícalo a tu gusto
+
+    // 1. Profit Margin (Donut)
+    const profitMarginChart = new Chart(
+      document.getElementById('profitMarginChart'),
+      {
+        type: 'doughnut',
+        data: {
+          labels: ['Margen', 'Restante'],
+          datasets: [{
+            data: [15.34, 100 - 15.34],
+            backgroundColor: ['#AA4465', '#f0f0f0']
+          }]
+        },
+        options: {
+          cutout: '70%',
+          plugins: { legend: { display: false } }
+        }
+      }
+    );
+
+    // 2. Sales Target Achievement
+    const salesTargetChart = new Chart(
+      document.getElementById('salesTargetChart'),
+      {
+        type: 'doughnut',
+        data: {
+          labels: ['Logrado', 'Pendiente'],
+          datasets: [{
+            data: [52.21, 100 - 52.21],
+            backgroundColor: ['#AA4465', '#f0f0f0']
+          }]
+        },
+        options: {
+          cutout: '70%',
+          plugins: { legend: { display: false } }
+        }
+      }
+    );
+
+    // 3. Target vs Actual by Region
+    const regionLabels = ['West', 'Central', 'East', 'South', 'North'];
+    const actualRegion = [0.3, 0.3, 0.3, 0.3, 0.3];
+    const targetRegion = [0.5, 0.45, 0.45, 0.6, 0.5];
+
+    const regionChart = new Chart(
+      document.getElementById('regionChart'),
+      {
+        type: 'bar',
+        data: {
+          labels: regionLabels,
+          datasets: [
+            {
+              label: 'Total Sales',
+              backgroundColor: '#EBCAED',
+              data: actualRegion
+            },
+            {
+              label: 'Sales Target',
+              backgroundColor: '#AA4465',
+              data: targetRegion
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: {
+              beginAtZero: true,
+              max: 0.7
+            }
+          }
+        }
+      }
+    );
+
+    // 4. Horizontal Bar por Persona
+    const salesLabels = ['John Doe', 'Emily Davis', 'Jane Smith', 'Michael Brown', 'Robert Johnson'];
+    const actualSales = [0.35, 0.27, 0.27, 0.27, 0.19];
+    const targetSales = [0.6, 0.63, 0.38, 0.59, 0.39];
+
+    const salespersonChart = new Chart(
+      document.getElementById('salespersonChart'),
+      {
+        type: 'bar',
+        data: {
+          labels: salesLabels,
+          datasets: [
+            {
+              label: 'Total Sales',
+              backgroundColor: '#FADCF1',
+              data: actualSales
+            },
+            {
+              label: 'Sales Target',
+              backgroundColor: '#AA4465',
+              data: targetSales
+            }
+          ]
+        },
+        options: {
+          indexAxis: 'y',
+          responsive: true,
+          scales: {
+            x: {
+              beginAtZero: true,
+              max: 0.7
+            }
+          }
+        }
+      }
+    );
+  </script>
+
+</body>
+</html>
