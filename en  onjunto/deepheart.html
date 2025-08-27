@@ -32,6 +32,7 @@
     .signup-btn { background: var(--primary); color: white; padding: 10px 18px; border-radius: var(--radius); border: none; font-weight: 600; transition: background .2s; }
     .signup-btn:hover { background: #c56075; }
 
+    
     /* HERO */
     .hero { display: grid; grid-template-columns: 1.1fr .9fr; align-items: center; gap: 32px; background: var(--primary); color: white; padding: 80px 20px; border-bottom-left-radius: var(--radius); border-bottom-right-radius: var(--radius); }
     .hero h1 { font-size: 2.6rem; margin-bottom: 16px; }
@@ -81,16 +82,72 @@
     .service-card .more { max-height: 0; overflow: hidden; transition: max-height .3s, padding .3s; padding: 0 14px; text-align: left; }
     .service-card.open .more { max-height: 420px; padding: 12px; }
 
-    /* GALLERY */
-    .gallery-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); padding: 20px; }
-    .caption { font-size: .9rem; font-weight: 500; margin-top: 8px; }
+    /* ===== GALLERY (adaptar a tamaños variados sin deformar) ===== */
+    .gallery-grid{
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap:16px;
+      padding:20px;
+      max-width:1100px;
+      margin:0 auto 60px;
+    }
+    .photo{
+      background:#fff;
+      border:1px solid #e8e8ee;
+      border-radius:16px;
+      padding:12px;
+      text-align:center;
+      box-shadow: 0 2px 6px rgba(0,0,0,.04);
+    }
+    .photo img{
+      display:block;
+      width:100%;
+      height:auto;          /* mantiene proporción */
+      max-height:320px;     /* límite para evitar “cards” gigantes */
+      object-fit:contain;   /* se ve completa (puede dejar bandas) */
+      object-position:center;
+      background:#f6f6f6;   /* fondo neutro detrás si sobra espacio */
+      border-radius:12px;
+    }
+    .caption { margin-top:8px; font-size:.92rem; font-weight:600; }
+
+    /* OPCIONAL: mismo alto recortando (mosaico perfecto) */
+    .photo.cover img{
+      height:220px;         /* mismo alto en todas */
+      object-fit:cover;     /* recorta lo que sobra */
+    }
+/* ==== AUTH DIALOG ==== */
+.auth-dialog {
+  border: none; border-radius: 16px; padding: 0; width: min(92vw, 420px);
+  box-shadow: 0 10px 40px rgba(0,0,0,.20);
+}
+.auth-dialog::backdrop { background: rgba(0,0,0,.35); }
+#authForm { padding: 20px; display: grid; gap: 12px; }
+#authForm h3 { margin: 0 0 6px; color: #aa4465; }
+#authForm label { display: grid; gap: 6px; font-size: .95rem; }
+#authForm input {
+  padding: 10px 12px; border:1px solid #e6d5db; border-radius: 10px; outline: none;
+}
+.btn-auth {
+  background: var(--primary); color:#fff; border:none; padding:10px 14px;
+  border-radius: 12px; font-weight:700; cursor:pointer;
+}
+.auth-switch { font-size: .9rem; text-align:center; margin: 2px 0 0; }
+.auth-switch a { color: var(--primary); font-weight: 700; }
+.auth-msg { min-height: 18px; font-size:.9rem; color:#7a3340; }
+.auth-close {
+  background: #f1e6e9; border: none; padding: 8px 10px; border-radius: 10px;
+}
+#signOutBtn { display:none; margin-left: 10px; background: #5b2a3e; }
 
     /* Animaciones opcionales */
     @keyframes fade-in { 0%{opacity:0;transform:translateY(20px)} 100%{opacity:1;transform:translateY(0)} }
     .animated { animation-duration: 1s; animation-fill-mode: both; }
     .fade-in { animation-name: fade-in; }
 
-    @media (max-width: 960px) { .hero { grid-template-columns: 1fr; text-align:center; } .hero h1 { font-size: 2rem; } }
+    @media (max-width: 960px) {
+      .hero { grid-template-columns: 1fr; text-align:center; }
+      .hero h1 { font-size: 2rem; }
+    }
   </style>
 </head>
 <body>
@@ -110,6 +167,28 @@
     </nav>
     <button class="signup-btn">Regístrate</button>
   </header>
+<!-- AUTH DIALOG -->
+<dialog id="authDialog" class="auth-dialog">
+  <form id="authForm" method="dialog">
+    <h3 id="authTitle">Crear cuenta</h3>
+    <label>
+      <span>Correo</span>
+      <input type="email" id="authEmail" required>
+    </label>
+    <label>
+      <span>Contraseña (≥ 6)</span>
+      <input type="password" id="authPass" minlength="6" required>
+    </label>
+
+    <button type="submit" class="btn-auth">Crear cuenta</button>
+    <p class="auth-switch">
+      <span>¿Ya tienes cuenta?</span>
+      <a href="#" id="toggleAuth">Iniciar sesión</a>
+    </p>
+    <p id="authMsg" class="auth-msg"></p>
+    <button type="button" id="closeAuth" class="auth-close">Cerrar</button>
+  </form>
+</dialog>
 
   <!-- HERO con visor -->
   <section class="hero" id="hero">
@@ -195,13 +274,40 @@
   </section>
 
   <!-- GALLERY -->
-  <section class="section-white gallery" id="gallery">
-    <h2>Galería</h2>
+  <section id="gallery" class="section-white">
     <div class="gallery-grid">
-      <div class="photo"><img src="imagenes/detection1.png" alt=""><p class="caption">Imagen 1</p></div>
-      <div class="photo"><img src="imagenes/detection2.png" alt=""><p class="caption">Imagen 2</p></div>
-      <div class="photo"><img src="imagenes/detection3.png" alt=""><p class="caption">Imagen 3</p></div>
-      <div class="photo"><img src="imagenes/detection4.png" alt=""><p class="caption">Imagen 4</p></div>
+      <figure class="photo">
+        <img src="../imagenes/detection1.png" alt="Imagen 1" loading="lazy">
+        <figcaption class="caption">Imagen 1</figcaption>
+      </figure>
+      <figure class="photo">
+        <img src="../imagenes/foto1.jpg" alt="Imagen 2" loading="lazy">
+        <figcaption class="caption">Imagen 2</figcaption>
+      </figure>
+      <figure class="photo">
+        <img src="../imagenes/foto2.jpg" alt="Imagen 3" loading="lazy">
+        <figcaption class="caption">Imagen 3</figcaption>
+      </figure>
+      <figure class="photo">
+        <img src="../imagenes/foto4.jpg" alt="Imagen 4" loading="lazy">
+        <figcaption class="caption">Imagen 4</figcaption>
+      </figure>
+      <figure class="photo">
+        <img src="../imagenes/foto5.jpg" alt="Imagen 5" loading="lazy">
+        <figcaption class="caption">Imagen 5</figcaption>
+      </figure>
+      <figure class="photo">
+        <img src="../imagenes/foto6.jpg" alt="Imagen 6" loading="lazy">
+        <figcaption class="caption">Imagen 6</figcaption>
+      </figure>
+      <figure class="photo">
+        <img src="../imagenes/foto7.jpg" alt="Imagen 7" loading="lazy">
+        <figcaption class="caption">Imagen 7</figcaption>
+      </figure>
+      <figure class="photo">
+        <img src="../imagenes/foyo8.jpg" alt="Imagen 8" loading="lazy">
+        <figcaption class="caption">Imagen 8</figcaption>
+      </figure>
     </div>
   </section>
 
@@ -244,8 +350,8 @@
         }
       });
 
-      // DEMO: cambia estas rutas por tus imágenes reales
-      setResultImages('imagenes/original.jpg', 'imagenes/prediccion.png');
+      // DEMO: usa mismas rutas que la galería (carpeta ../imagenes/)
+      setResultImages('../imagenes/original.jpg', '../imagenes/prediccion.png');
     })();
 
     /* ====== Charts ====== */
@@ -266,6 +372,110 @@
     initChart('chart5','bar',['Sur América','Asia-Pacífico','M.O. & África','Norteamérica','Europa'],[64,64,63,47,45], {
       scales: { y: { beginAtZero:true, max:80, ticks:{ stepSize:10 } } }
     });
+
+    
   </script>
+  <script type="module">
+  // Firebase v12 (CDN ESM)
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+  import { getAnalytics, isSupported as analyticsIsSupported } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-analytics.js";
+  import {
+    getAuth, onAuthStateChanged,
+    createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut
+  } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
+  // === TU CONFIG ===
+  const firebaseConfig = {
+    apiKey: "AIzaSyB6tdpk1agA4eDxqEcWbeWEYZMQCjCKLiQ",
+    authDomain: "core-873a4.firebaseapp.com",
+    projectId: "core-873a4",
+    storageBucket: "core-873a4.firebasestorage.app",
+    messagingSenderId: "761268055814",
+    appId: "1:761268055814:web:c89d588a0668745afeb887",
+    measurementId: "G-H1K3K0XBN6"
+  };
+
+  // === INIT ===
+  const app = initializeApp(firebaseConfig);
+  try { if (await analyticsIsSupported()) getAnalytics(app); } catch(e) { /* opcional */ }
+  const auth = getAuth(app);
+
+  // === UI refs ===
+  const signupBtn = document.querySelector('.signup-btn');     // botón "Regístrate" en navbar
+  const signOutBtn = document.createElement('button');         // botón "Salir"
+  signOutBtn.id = 'signOutBtn';
+  signOutBtn.className = 'signup-btn';
+  signOutBtn.textContent = 'Salir';
+  document.querySelector('.navbar').appendChild(signOutBtn);
+
+  const dlg = document.getElementById('authDialog');
+  const form = document.getElementById('authForm');
+  const emailEl = document.getElementById('authEmail');
+  const passEl = document.getElementById('authPass');
+  const titleEl = document.getElementById('authTitle');
+  const msgEl = document.getElementById('authMsg');
+  const toggleEl = document.getElementById('toggleAuth');
+  const closeEl = document.getElementById('closeAuth');
+
+  let mode = 'signup'; // 'signup' | 'signin'
+
+  const setMode = (m) => {
+    mode = m;
+    titleEl.textContent = (m === 'signup') ? 'Crear cuenta' : 'Iniciar sesión';
+    form.querySelector('.btn-auth').textContent = (m === 'signup') ? 'Crear cuenta' : 'Entrar';
+    document.querySelector('.auth-switch span').textContent = (m === 'signup')
+      ? '¿Ya tienes cuenta?' : '¿Aún no tienes cuenta?';
+    toggleEl.textContent = (m === 'signup') ? 'Iniciar sesión' : 'Crear cuenta';
+    msgEl.textContent = '';
+  };
+
+  // Abrir/cerrar
+  signupBtn.addEventListener('click', () => {
+    setMode('signup');
+    dlg.showModal();
+  });
+  closeEl.addEventListener('click', () => dlg.close());
+  toggleEl.addEventListener('click', (e) => {
+    e.preventDefault();
+    setMode(mode === 'signup' ? 'signin' : 'signup');
+  });
+
+  // Submit
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    msgEl.textContent = 'Procesando…';
+    try {
+      const email = emailEl.value.trim();
+      const pass = passEl.value;
+      if (mode === 'signup') {
+        await createUserWithEmailAndPassword(auth, email, pass);
+        msgEl.textContent = 'Cuenta creada ✔';
+      } else {
+        await signInWithEmailAndPassword(auth, email, pass);
+        msgEl.textContent = 'Sesión iniciada ✔';
+      }
+      setTimeout(() => dlg.close(), 600);
+    } catch (err) {
+      msgEl.textContent = (err?.message || 'Error de autenticación');
+    }
+  });
+
+  // Cerrar sesión
+  signOutBtn.addEventListener('click', async () => {
+    try { await signOut(auth); } catch(e) {}
+  });
+
+  // Estado de sesión
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      signupBtn.textContent = user.email || 'Mi cuenta';
+      signOutBtn.style.display = 'inline-block';
+    } else {
+      signupBtn.textContent = 'Regístrate';
+      signOutBtn.style.display = 'none';
+    }
+  });
+</script>
+
 </body>
 </html>
