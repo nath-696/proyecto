@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>CORE — Experiencia Completa</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #E67882;
+      --secondary: #E7ABAF;
+      --bg: #FFF0F3;
+      --text: #0F172A;
+      --radius: 12px;
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
+    button { font: inherit; cursor: pointer; }
+
+    .navbar {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 16px 32px; background: white; box-shadow: var(--shadow);
+      position: sticky; top: 0; z-index: 100;
+    }
+    .logo {
+      display: flex; align-items: center;
+    }
+    .logo img {
+      height: 48px; margin-right: 12px;
+    }
+    .logo span {
+      font-size: 1.8rem; font-weight: 700; color: var(--primary);
+    }
+    nav ul {
+      display: flex; gap: 24px; list-style: none;
+    }
+    nav a {
+      font-weight: 500; padding: 6px 8px; border-radius: 6px;
+      transition: background .2s;
+    }
+    nav a:hover {
+      background: var(--secondary);
+    }
+    .signup-btn {
+      background: var(--primary); color: white;
+      padding: 10px 18px; border-radius: var(--radius); border: none;
+      font-weight: 600; transition: background .2s;
+    }
+    .signup-btn:hover {
+      background: #c56075;
+    }
+
+    .hero {
+      background: var(--primary); color: white;
+      text-align: center; padding: 100px 20px;
+      border-bottom-left-radius: var(--radius);
+      border-bottom-right-radius: var(--radius);
+    }
+    .hero h1 {
+      font-size: 2.6rem; margin-bottom: 16px;
+    }
+    .hero p {
+      font-size: 1.2rem; margin: 0 auto 24px; max-width: 700px;
+    }
+    .hero .btn {
+      background: white; color: var(--primary);
+      padding: 12px 30px; border: none; border-radius: var(--radius);
+      font-weight: 600; transition: opacity .2s;
+    }
+    .hero .btn:hover {
+      opacity: 0.9;
+    }
+
+    section {
+      padding: 60px 20px;
+    }
+    .section-white {
+      background: white;
+      margin: 40px auto;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      max-width: 1100px;
+    }
+
+    .cards, .dashboard-grid, .grid-services, .gallery-grid {
+      display: grid; gap: 20px;
+    }
+    .cards {
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      padding: 40px;
+    }
+    .card, .service-card, .photo {
+      background: var(--bg); border-radius: var(--radius); box-shadow: var(--shadow);
+      padding: 20px; text-align: center;
+      transition: transform .2s;
+    }
+    .card:hover, .service-card:hover {
+      transform: translateY(-4px);
+    }
+    .card h3, .service-card h3 {
+      color: var(--primary); margin-bottom: 12px;
+    }
+    .card button, .more-toggle {
+      background: var(--primary); color: white; border: none;
+      padding: 10px 16px; border-radius: var(--radius);
+      font-weight: 600; transition: background .2s;
+    }
+    .card button:hover, .more-toggle:hover {
+      background: var(--secondary);
+    }
+
+    .dashboard section {
+      padding: 60px 0;
+    }
+    .dashboard-grid {
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+    .dashboard .section-white header {
+      margin-bottom: 20px;
+    }
+
+    .pipeline-section .pipeline-timeline {
+      max-width: 800px; margin: 0 auto; border-left: 3px solid var(--secondary);
+      padding-left: 30px;
+    }
+    .pipeline-step {
+      position: relative; margin-bottom: 30px;
+    }
+    .pipeline-step .circle {
+      position: absolute; left: -45px; top: 0;
+      width: 32px; height: 32px; background: var(--primary);
+      color: white; border-radius: 50%;
+      font-weight: bold; text-align: center; line-height: 32px;
+    }
+    .pipeline-step h3 {
+      color: var(--primary); margin-bottom: 5px;
+    }
+    .pipeline-step p {
+      color: #555;
+    }
+
+    .info .info-box {
+      background: var(--bg); padding: 24px;
+      border-radius: var(--radius); box-shadow: var(--shadow);
+    }
+
+    .grid-services {
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+    .service-icon {
+      font-size: 1.5rem; color: var(--primary); margin-bottom: 12px;
+    }
+    .service-card .more {
+      max-height: 0; overflow: hidden;
+      transition: max-height .3s, padding .3s;
+      padding: 0 14px;
+    }
+    .service-card.open .more {
+      max-height: 400px; padding: 12px;
+    }
+
+    .gallery-grid {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      padding: 20px;
+    }
+    .caption {
+      font-size: .9rem; font-weight: 500;
+      margin-top: 8px;
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2rem; }
+      .section-white { margin: 20px 10px; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="logo">
+      <img src="logo1.png" alt="CORE Logo" />
+      <span>CORE</span>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#hero">Inicio</a></li>
+        <li><a href="#dashboard">Health Data</a></li>
+        <li><a href="#services">Servicios</a></li>
+        <li><a href="#gallery">Galería</a></li>
+      </ul>
+    </nav>
+    <button class="signup-btn">Regístrate</button>
+  </header>
+
+  <section class="hero" id="hero">
+    <h1>Sistema Inteligente para la Detección de Cáncer de Mama</h1>
+    <p>Precisión, confiabilidad y asistencia médica en tiempo real con IA.</p>
+    <button class="btn" onclick="document.getElementById('dashboard').scrollIntoView({ behavior: 'smooth'})">
+      Explorar estadísticas
+    </button>
+  </section>
+
+  <section class="section-white cards">
+    <div class="card"><h3>Heart Failure</h3><p>Riesgo de insuficiencia cardíaca</p><button onclick="alert('Test Heart Failure')">Test</button></div>
+    <div class="card"><h3>Cardiovascular</h3><p>Evaluación cardiovascular</p><button onclick="alert('Test Cardiovascular')">Test</button></div>
+    <div class="card"><h3>Heart Attack</h3><p>Probabilidad de infarto</p><button onclick="alert('Test Heart Attack')">Test</button></div>
+  </section>
+
+  <section class="section-white dashboard" id="dashboard">
+    <h2>Panel de IA en Salud</h2>
+    <p>Visualiza percepción y uso de IA en medicina moderna.</p>
+    <div class="dashboard-grid">
+      <div class="card"><h3>Aceptación LatAm</h3><canvas id="chart1"></canvas></div>
+      <div class="card"><h3>Inversión médica</h3><canvas id="chart2"></canvas></div>
+      <div class="card"><h3>IA en salud pública</h3><canvas id="chart3"></canvas></div>
+      <div class="card"><h3>Confianza en México</h3><canvas id="chart4"></canvas></div>
+      <div class="card"><h3>Impacto en decisiones</h3><canvas id="chart5"></canvas></div>
+    </div>
+  </section>
+
+  <section class="section-white pipeline-section">
+    <h2>Funcionamiento del Modelo</h2>
+    <div class="pipeline-timeline">
+      <div class="pipeline-step"><div class="circle">1</div><h3>Factibilidad</h3><p>Evaluación funcional del sistema IA.</p></div>
+      <div class="pipeline-step"><div class="circle">2</div><h3>Entrenamiento</h3><p>Modelos entrenados con YOLOv8 y datos clínicos.</p></div>
+      <div class="pipeline-step"><div class="circle">3</div><h3>Automatización</h3><p>Procesamiento sin intervención manual.</p></div>
+      <div class="pipeline-step"><div class="circle">4</div><h3>Procesamiento</h3><p>Análisis en <1 s con GPU.</p></div>
+      <div class="pipeline-step"><div class="circle">5</div><h3>Monitoreo</h3><p>Verificación en tiempo real.</p></div>
+    </div>
+  </section>
+
+  <section class="section-white info" id="services">
+    <div class="container">
+      <h2>Evaluación mamaria: próximos pasos</h2>
+      <div class="info-box">
+        <p>Este sistema permite una detección confiable, asistencia profesional y seguimiento personalizado para la salud mamaria.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-white services">
+    <div class="container">
+      <h2>Casos observados</h2>
+      <div class="grid-services"> 
+
+        <div class="service-card">
+          <div class="service-icon">✅</div>
+          <h3>Hallazgo benigno</h3>
+          <p>Alteración no cancerosa con rasgos tranquilos en imagen.</p>
+          <button class="more-toggle">Saber más</button>
+          <div class="more"><p>Información detallada sobre hallazgos benignos y seguimiento.</p></div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">⚠️</div>
+          <h3>Hallazgo sospechoso</h3>
+          <p>Lesión con signos de alerta, precisa evaluación avanzada.</p>
+          <button class="more-toggle">Saber más</button>
+          <div class="more"><p>Información detallada sobre lesiones sospechosas.</p></div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">📊</div>
+          <h3>Factores de riesgo</h3>
+          <p>Evaluación de elementos genéticos y ambientales.</p>
+          <button class="more-toggle">Saber más</button>
+          <div class="more"><p>Lista de factores modificables y no modificables.</p></div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">🔎</div>
+          <h3>Atención temprana</h3>
+          <p>Consejos para detección y monitoreo continuo.</p>
+          <button class="more-toggle">Saber más</button>
+          <div class="more"><p>Prácticas recomendadas para detección precoz.</p></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section-white gallery" id="gallery">
+    <h2>Galería</h2>
+    <div class="gallery-grid">
+      <div class="photo"><img src="imagenes/detection1.png" alt=""><p class="caption">Imagen 1</p></div>
+      <div class="photo"><img src="imagenes/detection2.png" alt=""><p class="caption">Imagen 2</p></div>
+      <div class="photo"><img src="imagenes/detection3.png" alt=""><p class="caption">Imagen 3</p></div>
+      <div class="photo"><img src="imagenes/detection4.png" alt=""><p class="caption">Imagen 4</p></div>
+    </div>
+  </section>
+
+  <script>
+    document.addEventListener('click', e => {
+      const btn = e.target.closest('.more-toggle');
+      if (!btn) return;
+      const card = btn.closest('.service-card');
+      card.classList.toggle('open');
+      btn.textContent = card.classList.contains('open') ? 'Ver menos' : 'Saber más';
+    });
+
+    const initChart = (id,type,labels,data) => {
+      new Chart(document.getElementById(id), {
+        type,
+        data: { labels, datasets: [{ data, backgroundColor: ['#E67882','#E7ABAF','#F8C6CC','#FFF0F3'] }] },
+        options: { responsive:true, plugins:{legend:{position:'bottom'}}}
+      });
+    };
+
+    initChart('chart1','pie',['LatAm','Saludables','No saludables'],[56.4,38.9,40.9]);
+    initChart('chart2','bar',['2018','2025'],[24,36]);
+    initChart('chart3','doughnut',['Saludables','No saludables'],[65,66.9]);
+    initChart('chart4','bar',['México','Global'],[58.1,42]);
+    initChart('chart5','bar',['SurAm','Asia','África','NA','Europa'],[64,64,63,47,45]);
+  </script>
+
+</body>
+</html>

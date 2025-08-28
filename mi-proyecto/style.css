@@ -1,15 +1,16 @@
 body {
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background-color: rgb(245, 239, 255);
+  font-family: 'Poppins', sans-serif;
+  background-color: #f9e0ec; /* fondo más fuerte que el anterior */
   color: #333;
 }
 
+/* ---------------- HERO ------------------ */
 .hero {
-  background-color: rgb(250, 220, 241);
+  background-color: #f7cde4;
   text-align: center;
   padding: 60px 20px;
-  color: rgb(170, 68, 101);
+  color: #aa4465;
 }
 
 .hero h1 {
@@ -20,17 +21,9 @@ body {
   font-size: 1.1em;
   margin-bottom: 20px;
 }
-.grid-dashboard {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
 
 .btn {
-  background-color: rgb(170, 68, 101);
+  background-color: #aa4465;
   color: white;
   padding: 12px 24px;
   text-decoration: none;
@@ -38,54 +31,29 @@ body {
   font-weight: bold;
 }
 
+/* ---------------- DASHBOARD ------------------ */
 .dashboard {
-  padding: 50px 20px;
-  background-color: rgb(235, 202, 237);
-}
-
-.dashboard h2 {
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-canvas {
-  display: block;
-  margin: 20px auto;
-  max-width: 90%;
-}
-
-.proyecto {
-  background-color: white;
-  padding: 50px 20px;
-}
-
-.proyecto h2 {
-  color: rgb(170, 68, 101);
+  background-color: #fce4f2;
+  padding: 80px 20px;
   text-align: center;
 }
 
-.proyecto ul {
-  list-style: none;
-  padding-left: 0;
-  max-width: 700px;
-  margin: auto;
-}
-
-.proyecto li {
-  margin: 10px 0;
-  background-color: rgb(245, 239, 255);
-  padding: 12px;
-  border-radius: 6px;
-}
-.dashboard {
-  background-color: rgb(235, 202, 237);
-  padding: 50px 20px;
-}
-
-.dashboard h2 {
-  text-align: center;
+.dashboard-title {
+  font-size: 2.6rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
   color: #aa4465;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
+  letter-spacing: -1px;
+  animation: pop-in 1s ease forwards;
+}
+
+.dashboard-subtitle {
+  max-width: 800px;
+  margin: 0 auto 50px;
+  font-size: 1.1rem;
+  color: #5b2a3e;
+  animation: fade-in 2s ease;
 }
 
 .dashboard-grid {
@@ -101,6 +69,7 @@ canvas {
   border-radius: 16px;
   padding: 20px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
 }
 
 .card h3 {
@@ -112,67 +81,313 @@ canvas {
 .card.wide {
   grid-column: span 2;
 }
-.dashboard-description {
-  max-width: 800px;
-  margin: 0 auto 40px auto;
-  text-align: center;
-  font-size: 1rem;
-  color: #444;
-  background: #f5efff;
-  padding: 15px 25px;
-  border-radius: 10px;
+
+canvas {
+  display: block;
+  margin: 20px auto;
+  max-width: 90%;
 }
+
+.dashboard-box {
+  background-color: #fff;
+  border: 2px solid #aa4465;
+  border-radius: 16px;
+  padding: 30px;
+  margin-top: 50px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+  box-shadow: 0 6px 20px rgba(170, 68, 101, 0.15);
+}
+
+.dashboard-box h3 {
+  color: #aa4465;
+  margin-bottom: 15px;
+  font-size: 1.3rem;
+}
+
+.dashboard-box ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dashboard-box li {
+  margin-bottom: 10px;
+}
+
+.dashboard-box a {
+  text-decoration: none;
+  color: #5b2a3e;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.dashboard-box a:hover {
+  color: #aa4465;
+}
+
+/* Tarjeta de fuentes alineada correctamente */
+.sources-card {
+  grid-column: 1 / -1; /* Abarca todas las columnas disponibles */
+  background-color: #fff7fb;
+  border: 2px solid #aa4465;
+  border-radius: 16px;
+  padding: 25px 40px;
+  box-shadow: 0 4px 14px rgba(170, 68, 101, 0.12);
+  text-align: left;
+  margin-top: 20px;
+}
+
+.sources-card h3 {
+  font-size: 1.4rem;
+  color: #aa4465;
+  margin-bottom: 5px;
+  font-weight: 700;
+}
+
+.sources-card .sources-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.sources-card .sources-list li {
+  font-size: 1rem;
+}
+
+.sources-card .sources-list a {
+  color: #5b2a3e;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.sources-card .sources-list a:hover {
+  color: #aa4465;
+}
+
+/* Hover en gráficas */
+.card:hover, canvas:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 24px rgba(170, 68, 101, 0.25);
+}
+.card-text {
+  font-size: 0.95rem;
+  color: #555;
+  margin-top: 10px;
+  text-align: left;
+}
+
+.sources-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 15px;
+  text-align: left;
+}
+
+.sources-list li {
+  margin-bottom: 8px;
+}
+
+.sources-list a {
+  color: #5b2a3e;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.sources-list a:hover {
+  color: #aa4465;
+}
+
+
+/* ---------------- FUNCIONAMIENTO ------------------ */
+
 .pipeline-section {
-  background: white;
-  padding: 60px 20px;
+  background: #fff;
+  padding: 80px 20px;
   text-align: center;
 }
 
 .pipeline-section h2 {
+  font-size: 2.2rem;
   color: #aa4465;
-  margin-bottom: 50px;
+  margin-bottom: 60px;
+  font-weight: 700;
 }
 
+/* Timeline Container */
 .pipeline-timeline {
   max-width: 800px;
   margin: 0 auto;
   position: relative;
-  padding-left: 30px;
-  border-left: 4px solid #ebcaed;
+  padding-left: 60px;
 }
 
+/* Línea vertical */
+.pipeline-timeline::before {
+  content: "";
+  position: absolute;
+  left: 30px;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(to bottom, #aa4465, #fce4f2);
+  border-radius: 2px;
+  z-index: 0;
+}
+
+/* Tarjetas */
 .pipeline-step {
   position: relative;
-  margin-bottom: 50px;
-  padding-left: 20px;
+  margin-bottom: 60px;
+  padding: 20px 25px 20px 40px;
+  background-color: #fce4f2;
   text-align: left;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(170, 68, 101, 0.12);
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(40px);
+  /* 🔥 Efecto de borde izquierdo rosado (inicialmente transparente) */
+  border-left: 4px solid transparent;
+}
+
+/* Animación cuando entra en pantalla */
+.pipeline-step.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.pipeline-step:hover {
+  box-shadow: 0 8px 20px rgba(170, 68, 101, 0.2);
+  transform: translateX(6px);
+   border-left: 4px solid #aa4465; /* 💥 Línea lateral rosada más fuerte */
+}
+
+/* Círculo con número */
+.pipeline-step .circle {
+  position: absolute;
+  left: -46px; /* totalmente fuera de la tarjeta y centrado en la línea */
+  top: 20px;
+  width: 32px;
+  height: 32px;
+  background-color: #fff;
+  border: 3px solid #aa4465;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 28px;
+  font-weight: bold;
+  color: #aa4465;
+  font-size: 16px;
+  z-index: 2;
+  box-shadow: 0 4px 10px rgba(170, 68, 101, 0.15);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.pipeline-step .circle:hover {
+  background-color: #fadcf1;
+  transform: scale(1.1);
 }
 
 .pipeline-step h3 {
   margin: 0;
+  font-size: 1.1rem;
   color: #aa4465;
-  font-size: 1.2em;
+  font-weight: 600;
 }
 
 .pipeline-step p {
-  margin: 10px 0 0;
-  font-size: 1rem;
+  margin-top: 8px;
+  font-size: 0.95rem;
   color: #555;
 }
 
-.pipeline-step .circle {
-  position: absolute;
-  left: -42px;
-  top: 0;
-  width: 32px;
-  height: 32px;
-  background-color: #fadcf1;
-  border: 2px solid #aa4465;
-  border-radius: 50%;
-  text-align: center;
-  line-height: 30px;
-  font-weight: bold;
-  color: #aa4465;
-  font-size: 16px;
+/* ----------- Animaciones ----------- */
+@keyframes fade-in-down {
+  0% { opacity: 0; transform: translateY(-30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-up {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.animated {
+  opacity: 0;
+  animation-duration: 0.8s;
+  animation-fill-mode: forwards;
+}
+
+.fade-in-down {
+  animation-name: fade-in-down;
+}
+
+.fade-up {
+  animation-name: fade-up;
+}
+
+.delay-1 { animation-delay: 0.2s; }
+.delay-2 { animation-delay: 0.4s; }
+.delay-3 { animation-delay: 0.6s; }
+.delay-4 { animation-delay: 0.8s; }
+.delay-5 { animation-delay: 1s; }
+
+/* ---------------- Animaciones ------------------ */
+@keyframes fade-in {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-up {
+  0% { opacity: 0; transform: translateY(50px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pop-in {
+  0% { transform: scale(0.9); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.animated {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+
+.fade-in {
+  animation-name: fade-in;
+}
+
+.slide-up {
+  animation-name: slide-up;
+}
+/* Animaciones generales */
+@keyframes fade-slide-up {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.pipeline-step {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.6s ease;
+}
+
+.pipeline-step.visible {
+  opacity: 1;
+  transform: translateY(0);
+  animation: fade-slide-up 0.8s ease forwards;
 }
 

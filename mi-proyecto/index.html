@@ -6,6 +6,7 @@
   <title>Detección Inteligente de Cáncer de Mama</title>
   <link rel="stylesheet" href="style.css"/>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <!-- Hero Section -->
@@ -15,38 +16,67 @@
     <a href="#dashboard" class="btn">Explorar estadísticas</a>
   </section>
 
+<!-- DASHBOARD MEJORADO -->
 <section class="dashboard" id="dashboard">
-  <h2>📊 Panel de IA en Salud</h2>
+  <div class="dashboard-header animated fade-in">
+    <h2 class="dashboard-title">IA en la Salud del Futuro</h2>
+    <p class="dashboard-subtitle">
+      Exploramos cómo la inteligencia artificial está transformando la atención médica, desde la percepción pública hasta la inversión tecnológica.
+    </p>
+  </div>
+  <div class="dashboard-grid animated slide-up">
 
-  <p class="dashboard-description">
-    Las estadísticas reflejan cómo la inteligencia artificial está influyendo progresivamente en el diagnóstico médico, percepción pública y confianza por región. Estos datos permiten entender la adopción tecnológica y los desafíos regulatorios en salud.
-  </p>
+  <div class="card">
+    <h3>Aceptación de IA en la salud para Latinoamérica</h3>
+    <canvas id="chart1"></canvas>
+  </div>
 
-  <div class="dashboard-grid">
-    <div class="card">
-      <h3>Aceptación de IA en la salud para Latinoamerica</h3>
-      <canvas id="chart1"></canvas>
+  <div class="card">
+    <h3>Inversión en IA en el área médica</h3>
+    <canvas id="chart2"></canvas>
+    <p class="card-text">
+      La Inteligencia Artificial está transformando la atención 
+      médica y se proyecta que las inversiones en este sector alcancen los USD 36 mil millones en 2025 (50% más que en 2018). 
+      Su integración con la telemedicina promete ampliar el acceso a la salud y optimizar recursos en sistemas sobrecargados.
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>IA en el sector sanitario</h3>
+    <canvas id="chart3"></canvas>
+  </div>
+
+  <div class="card">
+    <h3>Encuesta YouGov Surveys 2024</h3>
+    <canvas id="chart4"></canvas>
+    <p class="card-text">
+      Según encuestas recientes, México supera el promedio global en percepción positiva hacia la IA médica, con un 58.1% de confianza en su uso para diagnóstico clínico.
+    </p>
+  </div>
+
+  <div class="card wide">
+    <h3>IA influenciará decisiones médicas (10 años)</h3>
+    <canvas id="chart5"></canvas>
+    <p class="card-text">
+      Los datos muestran que aproximadamente un 18 % más de profesionales sanitarios en Sudamérica creía que la IA desempeñaría un papel tan 
+      integral en sus trabajos dentro de diez años,
+       en comparación con los profesionales sanitarios en Europa.
+    </p>
+  </div>
+
+  <div class="card sources-card">
+  <h3><span style="font-size: 1.3rem;"></span> Fuentes de datos utilizados</h3>
+  <ul class="sources-list">
+    <li><a href="https://business.yougov.com/es/content/47252-latam-aceptan-personas-uso-ia-salud" target="_blank">YouGov – Latam: ¿Aceptan las personas el uso de IA en salud?</a></li>
+    <li><a href="https://www.caf.com/es/blog/como-puede-la-inteligencia-artificial-mejorar-la-salud-de-los-latinoamericanos/" target="_blank"> CAF – ¿Cómo puede la IA mejorar la salud de los latinoamericanos?</a></li>
+    <li><a href="https://www.unesco.org/es/artificial-intelligence/recommendation-ethics" target="_blank">UNESCO – Ética de la inteligencia artificial</a></li>
+    <li><a href="https://www.datacentermarket.es/inteligencia-artificial/el-sector-sanitario-lidera-la-adopcion-de-la-inteligencia-artificial/" target="_blank">Data Center Market – El sector sanitario lidera la adopción de la inteligencia artificial</a></li>
+  </ul>
+</div>
+
+</div>
+</section>
     </div>
-
-    <div class="card">
-      <h3>Inversión en IA en el área médica</h3>
-      <canvas id="chart2"></canvas>
-    </div>
-
-    <div class="card">
-      <h3>IA en el sector sanitario</h3>
-      <canvas id="chart3"></canvas>
-    </div>
-
-    <div class="card">
-      <h3>Confianza en México</h3>
-      <canvas id="chart4"></canvas>
-    </div>
-    <div class="card wide">
-      <h3>IA influenciará decisiones médicas (10 años)</h3>
-      <canvas id="chart5"></canvas>
-    </div>
-
   </div>
 </section>
 
@@ -54,40 +84,41 @@
 </section>
 <!-- Proyecto Técnico - Funcionamiento -->
 <section class="pipeline-section" id="funcionamiento">
-  <h2>Funcionamiento del Modelo de Diagnóstico</h2>
+  <h2 class="animated fade-in-down">Funcionamiento del Modelo de Diagnóstico</h2>
   <div class="pipeline-timeline">
 
-    <div class="pipeline-step">
+    <div class="pipeline-step animated fade-up delay-1">
       <div class="circle">1</div>
       <h3>Factibilidad Operativa</h3>
       <p>Visión general del sistema y su estructura funcional con enfoque en IA médica.</p>
     </div>
 
-    <div class="pipeline-step">
+    <div class="pipeline-step animated fade-up delay-2">
       <div class="circle">2</div>
       <h3>Entrenamiento</h3>
       <p>El modelo ya se entrena con datasets de Kaggle y otras fuentes, usando YOLOv8 para reconocimiento de objetos.</p>
     </div>
 
-    <div class="pipeline-step">
+    <div class="pipeline-step animated fade-up delay-3">
       <div class="circle">3</div>
       <h3>Automatización</h3>
       <p>Scripts y frameworks web permiten el procesamiento continuo de datos sin intervención manual.</p>
     </div>
 
-    <div class="pipeline-step">
+    <div class="pipeline-step animated fade-up delay-4">
       <div class="circle">4</div>
       <h3>Procesamiento</h3>
       <p>El sistema ejecuta detección y análisis en tiempo real, generando reportes visuales en menos de 1 segundo (GPU).</p>
     </div>
 
-    <div class="pipeline-step">
+    <div class="pipeline-step animated fade-up delay-5">
       <div class="circle">5</div>
       <h3>Monitoreo y Validación</h3>
       <p>Supervisión continua del rendimiento, generando informes con métricas clave como precisión, recall y tiempo de inferencia.</p>
     </div>
 
   </div>
+</section>
 </section>
   <script src="script.js"></script>
 </body>
