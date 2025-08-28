@@ -36,10 +36,29 @@
   .btn-primary{ background: var(--rose-600); color:#fff; padding:12px 18px; border-radius:12px; font-weight:800; box-shadow: var(--shadow-md); border:none; }
   .btn-ghost{ border:1px solid var(--rose-300); color:#7a3340; padding:12px 16px; border-radius:12px; background:#fff; font-weight:700; }
 
-  .hero-visual{ position:relative; min-height: 360px; }
+  .hero-visual{ position:relative; min-height: 360px; display:grid; align-content:start; justify-items:end; gap:12px; }
   .blob{ position:absolute; inset: auto 0 0 auto; width: 82%; aspect-ratio:1/1; background: radial-gradient(closest-side, rgba(231,171,175,.6), rgba(231,171,175,.15)); border-radius: 36% 64% 52% 48% / 40% 44% 56% 60%; filter: blur(2px); }
-  .doctor{ position:absolute; right:6%; bottom:0; width:min(420px, 86%); height:auto; border-radius:24px; object-fit:cover; }
-  .doctor.placeholder{ background: #f3e6e9; border:1px dashed var(--rose-300); height: 92%; }
+
+  /* ====== VISOR en el recuadro rosa del HERO ====== */
+  .result-viewer{ position:relative; z-index:1; width:min(560px, 100%); }
+  .result-frame{
+    width:100%;
+    height:clamp(320px, 42vw, 460px);
+    background:#f3e6e9;
+    border:1px dashed var(--rose-300);
+    border-radius:24px;
+    box-shadow:0 2px 10px rgba(230,120,130,.08);
+    display:grid; place-items:center;
+    overflow:hidden;
+  }
+  .result-frame img{
+    max-width:100%;
+    max-height:100%;
+    object-fit:contain; /* soporta cualquier tamaño sin recortar */
+    display:block;
+  }
+  .btn-ghost.small{ padding:8px 12px; font-size:.9rem; border-radius:10px; justify-self:end; }
+  .btn-ghost[disabled]{ opacity:.55; cursor:not-allowed; }
 
   /* ===== Stats strip ===== */
   .stats{ display:grid; grid-template-columns: repeat(4,1fr); gap:14px; margin-top:18px; }
@@ -93,7 +112,7 @@
     word-break:break-word;
   }
   .service-card.open .more{
-    max-height:1000px; /* valor alto para textos extensos */
+    max-height:1000px;
     padding:14px;
     border-width:1px;
   }
@@ -109,6 +128,10 @@
   .photo{ position:relative; border-radius:16px; overflow:hidden; border:1px solid #e8e8ee; box-shadow: var(--shadow-sm); background:#f6f6f6; }
   .photo img{ width:100%; height:100%; display:block; object-fit:cover; aspect-ratio: 4 / 3; }
   .photo .caption{ position:absolute; left:0; right:0; bottom:0; padding:10px 12px; background:linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.35)); color:#fff; font-weight:600; font-size:.92rem; }
+  #togglePrev{
+  display:block;           /* el botón ocupa una línea completa */
+  margin:10px auto 0;      /* auto en los lados = centrado horizontal */
+}
 </style>
 </head>
 <body>
@@ -133,7 +156,14 @@
 
       <div class="hero-visual">
         <div class="blob" aria-hidden="true"></div>
-        <img class="doctor placeholder" alt="" />
+
+        <!-- ======= VISOR DE RESULTADOS (recuadro rosa + botón debajo) ======= -->
+        <div class="result-viewer">
+          <div class="result-frame">
+            <img id="resultImage" alt="Resultado de mamografía (predicción)">
+          </div>
+          <button id="togglePrev" type="button" class="btn-ghost small" disabled>Ver anterior</button>
+        </div>
       </div>
     </div>
   </section>
@@ -163,11 +193,12 @@
              quiste simple, fibroadenoma. Suele requerir seguimiento periódico y comparación con estudios previos, sin tratamientos invasivos salvo cambios.</p>
           <button type="button" class="btn more-toggle" aria-expanded="false">Saber más</button>
           <div class="more">
-           Un hallazgo benigno en mama es una alteración no cancerosa que, por su apariencia en imagen y el contexto 
+            Un hallazgo benigno en mama es una alteración no cancerosa que, por su apariencia en imagen y el contexto 
            clínico, tiene probabilidad muy baja de malignidad. Suele ser redondeado, con márgenes definidos y evolución estable,
             como quistes simples, fibroadenomas o calcificaciones típicamente inocuas. Ante estos hallazgos, la conducta habitual es control periódico y comparación con estudios previos para 
            confirmar estabilidad, evitando procedimientos innecesarios, pero consultando si aparecen cambios notorios, 
            crecimiento rápido, dolor persistente, secreción sanguinolenta u otros síntomas.
+
           </div>
         </div>
 
@@ -195,7 +226,7 @@
           <h3>Factores de riesgo</h3>
           <p>Incluyen no modificables (edad, antecedentes familiares, mutaciones BRCA1/2, densidad mamaria alta, 
             historia personal de lesiones de alto riesgo) y modificables (alcohol, obesidad posmenopáusica, sedentarismo,
-             tabaco, terapia hormonal combinada prolongada).   </p>
+             tabaco, terapia hormonal combinada prolongada).</p>
           <button type="button" class="btn more-toggle" aria-expanded="false">Saber más</button>
           <div class="more">
             Los factores de riesgo orientan un tamizaje personalizado. Entre los no modificables destacan la edad,
@@ -204,6 +235,7 @@
              sedentarismo, tabaco y terapia hormonal combinada prolongada. Modelos como Tyrer–Cuzick o Gail, sumados 
              a la densidad, estiman el riesgo a lo largo de la vida y también ayudan a decidir cuándo añadir resonancia o 
              controles más frecuentes.
+
           </div>
         </div>
 
@@ -215,7 +247,7 @@
             retracción del pezón, secreción. Detectar temprano permite tratamientos menos agresivos y obtener mejores resultados.</p>
           <button type="button" class="btn more-toggle" aria-expanded="false">Saber más</button>
           <div class="more">
-           Para una detección temprana efectiva, combina tamizaje según edad y riesgo con conciencia mamaria: conoce 
+            Para una detección temprana efectiva, combina tamizaje según edad y riesgo con conciencia mamaria: conoce 
            el aspecto habitual de tus mamas y consulta ante bulto nuevo, retracción del pezón, piel de naranja, 
            secreción espontánea o ganglio axilar duro. Conserva estudios previos para comparación, agenda recordatorios y
             sigue las indicaciones clínicas. La actividad física regular, limitar el alcohol y mantener peso saludable 
@@ -232,18 +264,57 @@
     <h2>Galería</h2>
     <p class="sub"><!-- Texto opcional --></p>
     <div class="gallery-grid">
-      <figure class="photo"><img src="imagenes/detection1.png" alt="" loading="lazy"><figcaption class="caption">detection1</figcaption></figure>
-      <figure class="photo"><img src="imagenes/" alt="" loading="lazy"><figcaption class="caption"></figcaption></figure>
-      <figure class="photo"><img src="" alt="" loading="lazy"><figcaption class="caption"></figcaption></figure>
-      <figure class="photo"><img src="" alt="" loading="lazy"><figcaption class="caption"></figcaption></figure>
-      <figure class="photo"><img src="" alt="" loading="lazy"><figcaption class="caption"></figcaption></figure>
-      <figure class="photo"><img src="" alt="" loading="lazy"><figcaption class="caption"></figcaption></figure>
-      <figure class="photo"><img src="" alt="" loading="lazy"><figcaption class="caption"></figcaption></figure>
-      <figure class="photo"><img src="" alt="" loading="lazy"><figcaption class="caption"></figcaption></figure>
+      <figure class="photo"><img src="imagenes/foto1.jpg" alt="" loading="lazy"><figcaption class="caption"><!-- caption --></figcaption></figure>
+      <figure class="photo"><img src="imagenes/foto2.jpg" alt="" loading="lazy"><figcaption class="caption"></figcaption></figure>
+      <figure class="photo"><img src="imagenes/foto3.jpg" alt="" loading="lazy"><figcaption class="caption"></figcaption></figure>
+      <figure class="photo"><img src="imagenes/foto4.jpg" alt="" loading="lazy"><figcaption class="caption"></figcaption></figure>
+      <figure class="photo"><img src="imagenes/foto5.jpg" alt="" loading="lazy"><figcaption class="caption"></figcaption></figure>
+      <figure class="photo"><img src="imagenes/foto6.jpg" alt="" loading="lazy"><figcaption class="caption"></figcaption></figure>
+      <figure class="photo"><img src="imagenes/foto7.jpg" alt="" loading="lazy"><figcaption class="caption"></figcaption></figure>
+      <figure class="photo"><img src="imagenes/foyo8.jpg" alt="" loading="lazy"><figcaption class="caption"></figcaption></figure>
     </div>
   </section>
 
 <script>
+/* Visor del HERO: cargar predicción y alternar con la imagen original */
+(function(){
+  const imgEl  = document.getElementById('resultImage');
+  const btn    = document.getElementById('togglePrev');
+
+  const state = { original:null, predicted:null, showing:'predicted' };
+
+  // Llama a esto cuando tengas las rutas listas:
+  // setResultImages('img/original.jpg', 'img/prediccion.png');
+  window.setResultImages = function(originalSrc, predictedSrc){
+    state.original  = originalSrc || null;
+    state.predicted = predictedSrc || originalSrc || null;
+    state.showing   = 'predicted';
+    imgEl.src = state.predicted || '';
+    const canToggle = !!state.original && !!state.predicted && state.original !== state.predicted;
+    btn.disabled = !canToggle;
+    btn.textContent = 'Ver anterior';
+    btn.setAttribute('aria-expanded','false');
+  };
+
+  btn?.addEventListener('click', function(){
+    if(!state.original) return;
+    if(state.showing === 'predicted'){
+      imgEl.src = state.original;
+      state.showing = 'original';
+      btn.textContent = 'Ver resultado';
+      btn.setAttribute('aria-expanded','true');
+    }else{
+      imgEl.src = state.predicted || state.original;
+      state.showing = 'predicted';
+      btn.textContent = 'Ver anterior';
+      btn.setAttribute('aria-expanded','false');
+    }
+  });
+
+  // DEMO opcional (borra o comenta estas líneas):
+  // setResultImages('img/demo_original.jpg', 'img/demo_prediccion.png');
+})();
+
 /* Expansión/colapso de tarjetas (en flujo) */
 (function(){
   document.addEventListener('click', function(ev){
@@ -252,7 +323,6 @@
     const card = btn.closest('.service-card');
     const opening = !card.classList.contains('open');
 
-    // Cerrar otras para evitar demasiada altura a la vez
     document.querySelectorAll('.service-card.open').forEach(c=>{
       if(c !== card){
         c.classList.remove('open');
@@ -264,6 +334,8 @@
     card.classList.toggle('open');
     btn.textContent = opening ? 'Ver menos' : 'Saber más';
     btn.setAttribute('aria-expanded', String(opening));
+
+    
   });
 })();
 </script>
