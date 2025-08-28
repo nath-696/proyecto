@@ -6,7 +6,7 @@ new Chart(document.getElementById('chart1'), {
     datasets: [{
       label: 'IA percepción social',
       data: [56.4, 38.9, 40.9],
-      backgroundColor: ['#aa4465', '#ebcaed', '#fadcf1'],
+      backgroundColor: ['#aa4465', '#d4a7d6ff', '#ebc2dcff'],
       cutout: '70%',
       borderRadius: 10
     }]
@@ -26,7 +26,7 @@ new Chart(document.getElementById('chart2'), {
     datasets: [{
       label: 'USD miles de millones',
       data: [24, 36],
-      backgroundColor: ['#fadcf1', '#aa4465'],
+      backgroundColor: ['#cc9abdff', '#aa4465'],
       borderRadius: 8
     }]
   },
@@ -38,14 +38,14 @@ new Chart(document.getElementById('chart2'), {
   }
 });
 
-// Chart 3: Regulación de IA
+// Chart 3: IA en el sector sanitario
 new Chart(document.getElementById('chart3'), {
   type: 'pie',
   data: {
-    labels: ['Saludables (65%)', 'No saludables (66.9%)'],
+    labels: ['Organizaciones médicas que emplean IA (99%)', 'Organizaciones que no emplean IA (1%)'],
     datasets: [{
-      data: [65, 66.9],
-      backgroundColor: ['#ebcaed', '#aa4465']
+      data: [99, 1],
+      backgroundColor: ['#aa4465','#eb9eefff']
     }]
   },
   options: {
@@ -63,7 +63,7 @@ new Chart(document.getElementById('chart4'), {
     datasets: [{
       label: 'IA para diagnóstico (%)',
       data: [58.1, 42],
-      backgroundColor: ['#aa4465', '#ebcaed'],
+      backgroundColor: ['#aa4465', '#e1a4e4ff'],
       borderRadius: 6
     }]
   },
@@ -87,7 +87,7 @@ new Chart(document.getElementById('chart5'), {
     datasets: [{
       label: 'Porcentaje (%)',
       data: [64, 64, 63, 47, 45],
-      backgroundColor: ['#aa4465', '#ebcaed', '#fadcf1', '#f5efff', '#c29ebd'],
+      backgroundColor: ['#aa4465', '#efabf3ff', '#eac9e0ff', '#ce86bfff', '#c29ebd'],
       borderRadius: 8
     }]
   },
