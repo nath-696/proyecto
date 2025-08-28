@@ -107,3 +107,39 @@ new Chart(document.getElementById('chart5'), {
     }
   }
 });
+const steps = document.querySelectorAll(".pipeline-step");
+
+const showOnScroll = () => {
+  steps.forEach((step) => {
+    const top = step.getBoundingClientRect().top;
+    if (top < window.innerHeight - 100) {
+      step.classList.add("visible");
+    }
+  });
+};
+
+window.addEventListener("scroll", showOnScroll);
+showOnScroll();
+// script.js
+document.addEventListener("DOMContentLoaded", () => {
+  const steps = document.querySelectorAll(".pipeline-step");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target); // Solo una vez
+        }
+      });
+    },
+    {
+      threshold: 0.1, // activa cuando el 10% de la tarjeta es visible
+    }
+  );
+
+  steps.forEach((step) => {
+    observer.observe(step);
+  });
+});
+

@@ -207,59 +207,137 @@ canvas {
 
 
 /* ---------------- FUNCIONAMIENTO ------------------ */
+
 .pipeline-section {
-  background: white;
-  padding: 60px 20px;
+  background: #fff;
+  padding: 80px 20px;
   text-align: center;
 }
 
 .pipeline-section h2 {
+  font-size: 2.2rem;
   color: #aa4465;
-  margin-bottom: 50px;
+  margin-bottom: 60px;
+  font-weight: 700;
 }
 
+/* Timeline Container */
 .pipeline-timeline {
   max-width: 800px;
   margin: 0 auto;
   position: relative;
-  padding-left: 30px;
-  border-left: 4px solid #ebcaed;
+  padding-left: 60px;
 }
 
+/* Línea vertical */
+.pipeline-timeline::before {
+  content: "";
+  position: absolute;
+  left: 30px;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(to bottom, #aa4465, #fce4f2);
+  border-radius: 2px;
+  z-index: 0;
+}
+
+/* Tarjetas */
 .pipeline-step {
   position: relative;
-  margin-bottom: 50px;
-  padding-left: 20px;
+  margin-bottom: 60px;
+  padding: 20px 25px 20px 40px;
+  background-color: #fce4f2;
   text-align: left;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(170, 68, 101, 0.12);
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(40px);
+  /* 🔥 Efecto de borde izquierdo rosado (inicialmente transparente) */
+  border-left: 4px solid transparent;
+}
+
+/* Animación cuando entra en pantalla */
+.pipeline-step.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.pipeline-step:hover {
+  box-shadow: 0 8px 20px rgba(170, 68, 101, 0.2);
+  transform: translateX(6px);
+   border-left: 4px solid #aa4465; /* 💥 Línea lateral rosada más fuerte */
+}
+
+/* Círculo con número */
+.pipeline-step .circle {
+  position: absolute;
+  left: -46px; /* totalmente fuera de la tarjeta y centrado en la línea */
+  top: 20px;
+  width: 32px;
+  height: 32px;
+  background-color: #fff;
+  border: 3px solid #aa4465;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 28px;
+  font-weight: bold;
+  color: #aa4465;
+  font-size: 16px;
+  z-index: 2;
+  box-shadow: 0 4px 10px rgba(170, 68, 101, 0.15);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.pipeline-step .circle:hover {
+  background-color: #fadcf1;
+  transform: scale(1.1);
 }
 
 .pipeline-step h3 {
   margin: 0;
+  font-size: 1.1rem;
   color: #aa4465;
-  font-size: 1.2em;
+  font-weight: 600;
 }
 
 .pipeline-step p {
-  margin: 10px 0 0;
-  font-size: 1rem;
+  margin-top: 8px;
+  font-size: 0.95rem;
   color: #555;
 }
 
-.pipeline-step .circle {
-  position: absolute;
-  left: -42px;
-  top: 0;
-  width: 32px;
-  height: 32px;
-  background-color: #fadcf1;
-  border: 2px solid #aa4465;
-  border-radius: 50%;
-  text-align: center;
-  line-height: 30px;
-  font-weight: bold;
-  color: #aa4465;
-  font-size: 16px;
+/* ----------- Animaciones ----------- */
+@keyframes fade-in-down {
+  0% { opacity: 0; transform: translateY(-30px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
+
+@keyframes fade-up {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.animated {
+  opacity: 0;
+  animation-duration: 0.8s;
+  animation-fill-mode: forwards;
+}
+
+.fade-in-down {
+  animation-name: fade-in-down;
+}
+
+.fade-up {
+  animation-name: fade-up;
+}
+
+.delay-1 { animation-delay: 0.2s; }
+.delay-2 { animation-delay: 0.4s; }
+.delay-3 { animation-delay: 0.6s; }
+.delay-4 { animation-delay: 0.8s; }
+.delay-5 { animation-delay: 1s; }
 
 /* ---------------- Animaciones ------------------ */
 @keyframes fade-in {
@@ -289,3 +367,27 @@ canvas {
 .slide-up {
   animation-name: slide-up;
 }
+/* Animaciones generales */
+@keyframes fade-slide-up {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.pipeline-step {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.6s ease;
+}
+
+.pipeline-step.visible {
+  opacity: 1;
+  transform: translateY(0);
+  animation: fade-slide-up 0.8s ease forwards;
+}
+
